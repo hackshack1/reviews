@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
 const config = require('../config.js');
+const moment = require('moment');
 const faker = require('faker');
+const pw = config.sqlPW || '';
 
-const db = new Sequelize('air6n6', 'root', config.sqlPW || '', {
+const db = new Sequelize('air6n6', 'root', pw, {
   dialect: 'mysql'
 });
 
@@ -20,8 +22,12 @@ const Listing = db.define('listing', {
     autoIncrement: true,
     primaryKey: true
   },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   basePrice: {
-    type: Sequelize.INTERGER,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   cleaningFee: {
@@ -29,15 +35,23 @@ const Listing = db.define('listing', {
     allowNull: false
   },
   serviceFee: {
-    type: Sequelize.INTERGER,
-    allowNull: false
-  },
-  minStay: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  maxStay: {
+  taxes: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
+  minStayWeekday: {
     type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  minStayWeekdend: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  discount: {
+    type: Sequelize.FLOAT,
     allowNull: false
   },
   instantBooked: {
@@ -45,7 +59,7 @@ const Listing = db.define('listing', {
     allowNull: false
   },
   maxGuest: {
-    type: Sequelize.INTERGER
+    type: Sequelize.INTEGER
   }
 });
 
@@ -54,6 +68,10 @@ const Reservation = db.define('reservation', {
     type: Sequelize.BOOLEAN,
     autoIncrement: true,
     primaryKey: true
+  },
+  user: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   checkIn: {
     type: Sequelize.DATE,
@@ -69,35 +87,32 @@ const Reservation = db.define('reservation', {
   }
 });
 
-Listing.hasMany(Reservation, { as: 'Reservations' });
+Listing.hasMany(Reservation, { as: 'reservation' });
+Reservation.belongsTo(Listing, { as: 'listing' });
 
-//example query & record creation:
-let createRecords = () => {
+let createRecords = mockList => {
   Listing.sync()
-    .then(() =>
-      Listing.create({
-        name: 'LA'
-      })
-    )
-    .then(() => Listing.findOne({ name: 'LA' }))
+    .then(() => Listing.create(mockList))
+    .then(() => Listing.findOne({ where: { location: mockList.location } }))
     .then(listing => {
+      let minStay = listing.minStayWeekdend;
       let key = listing.id;
-      return Reservation.sync().then(() =>
-        Reservation.create({
-          checkIn: '2019-11-25',
-          totalNights: 2,
-          listingId: key
-        })
-      );
-    })
-    .then(() =>
-      Reservation.findAll({
-        where: db.where(db.fn('month', db.col('checkIn')), '11')
-      })
-    )
-    .then(data => {
-      data.map(ele => {
-        console.log(ele.toJSON());
+      let maxGuest = listing.maxGuest;
+      return Reservation.sync().then(() => {
+        let currentDate = moment();
+
+        for (let k = 0; k < 3; k++) {
+          let totalNights = minStay + Math.floor(Math.random() * 5) + 1;
+          Reservation.create({
+            user: faker.name.findName(),
+            checkIn: currentDate,
+            totalNights: totalNights,
+            guests: Math.floor(Math.random() * maxGuest) + 1,
+            listingId: key
+          });
+          let days = Math.floor(Math.random() * 7) + 1;
+          currentDate = currentDate.add(totalNights + days, 'd');
+        }
       });
     })
     .catch(err => {
@@ -105,4 +120,18 @@ let createRecords = () => {
     });
 };
 
-createRecords();
+for (let k = 0; k < 3; k++) {
+  let listing = {
+    location: faker.address.streetAddress(),
+    basePrice: 90 + k,
+    cleaningFee: 10,
+    serviceFee: 5,
+    taxes: 0.09,
+    discount: Math.floor(Math.random() * 10) / 100,
+    minStayWeekday: Math.floor(Math.random() * 4),
+    minStayWeekdend: Math.floor(Math.random() * 2),
+    instantBooked: Math.round(Math.random()) ? true : false,
+    maxGuest: Math.floor(Math.random() * 5) + 4
+  };
+  createRecords(listing);
+}

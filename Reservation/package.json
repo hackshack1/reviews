@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "makeDB": "mysql -u root -p < ./database/schema.sql",
     "seed": "node ./database/seed.js",
-    "build": "webpack -d -w"
+    "build": "webpack -d -w",
+    "date": "node ./database/mockGenerator.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,7 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "mysql2": "^1.7.0",
     "path": "^0.12.7",

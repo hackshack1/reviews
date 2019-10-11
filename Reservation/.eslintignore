@@ -3,3 +3,6 @@
 **/bower_components
 **/lib
 mockGenerator.js
+config.js
+configEx.js
+./public/main.js

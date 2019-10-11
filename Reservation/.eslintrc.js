@@ -1,14 +1,21 @@
 module.exports = {
-  extends: ["airbnb", "prettier"],
-  plugins: ["prettier"],
+  extends: ['airbnb', 'prettier'],
+  plugins: ['prettier'],
   rules: {
-    "react/jsx-filename-extension": [
+    'react/jsx-filename-extension': [
       1,
       {
-        extensions: [".js", "jsx"]
+        extensions: ['.js', 'jsx']
       }
     ],
-    "prettier/prettier": "error",
-    "max-len": ["error", 80]
+    'prettier/prettier': 'error',
+    'max-len': ['error', 80],
+    'no-console': 'off',
+    'no-unused-vars': 'off',
+    'func-names': 'off',
+    'object-shorthand': 'off',
+    'class-methods-use-this': 'off',
+    'no-plusplus': 'off',
+    'react/destructuring-assignment': 'never'
   }
 };

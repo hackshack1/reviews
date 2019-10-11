@@ -1,16 +1,17 @@
 const Sequelize = require('sequelize');
-const model = require('./models.js');
 const moment = require('moment');
-const Op = Sequelize.Op;
+const model = require('./models.js');
 
-const Listing = model.Listing;
-const Reservation = model.Reservation;
+const { Op } = Sequelize;
+
+const { Listing } = model;
+const { Reservation } = model;
 
 const getTwoMonth = (listingId, month, callback) => {
-  let start = moment()
+  const start = moment()
     .date(1)
     .hour(0);
-  let end = moment()
+  const end = moment()
     .month(month)
     .date(31)
     .hour(0);
@@ -21,21 +22,21 @@ const getTwoMonth = (listingId, month, callback) => {
         model: Reservation,
         where: {
           checkIn: {
-            [Op.between]: [start, end]
-          }
-        }
-      }
-    ]
+            [Op.between]: [start, end],
+          },
+        },
+      },
+    ],
   })
     .then(data => {
-      let results = [];
-      data.map(ele => {
+      const results = [];
+      data.forEach(ele => {
         results.push(ele.toJSON());
       });
       callback(results);
     })
     .catch(err => {
-      console.error(err);
+      callback(err);
     });
 };
 

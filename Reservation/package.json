@@ -9,7 +9,8 @@
     "seed": "node ./database/seed.js",
     "build": "webpack -d -w",
     "start": "nodemon ./server/index.js",
-    "check": "node ./database/mockGenerator.js"
+    "check": "node ./database/mockGenerator.js",
+    "lint": "eslint ./"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,9 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
     "faker": "^4.1.0",
     "prettier": "^1.18.2",
     "react": "^16.10.1",

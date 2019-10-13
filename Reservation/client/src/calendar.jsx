@@ -16,11 +16,30 @@ class Calendar extends React.Component {
         .endOf('month')
         .format('D')
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick(e) {
+    let node = this.node;
+    if (node.contains(e.target)) {
+      console.log('clicked');
+    } else {
+      this.props.displayCal('');
+    }
   }
 
   createDays(firstDay, lastDate) {
-    let days = [];
-    let rows = [];
+    const days = [];
+    const rows = [];
     let start = 0;
     let end = 7;
 
@@ -28,7 +47,7 @@ class Calendar extends React.Component {
       days.push(<Day key={`b${k}`} day="" />);
     }
     for (let k = 1; k <= lastDate; k++) {
-      days.push(<Day key={k} day={k} />);
+      days.push(<Day key={k} month={this.state.month} day={k} />);
     }
 
     for (let k = 0; k < 5; k++) {
@@ -46,7 +65,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div ref={node => (this.node = node)}>
         <section>{this.state.month}</section>
         <table>
           <thead>

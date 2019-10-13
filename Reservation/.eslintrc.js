@@ -16,6 +16,7 @@ module.exports = {
     'object-shorthand': 'off',
     'class-methods-use-this': 'off',
     'no-plusplus': 'off',
-    'react/destructuring-assignment': 'never'
+    'react/destructuring-assignment': 'off',
+    'react/prop-types': 'skipUndeclared'
   }
 };

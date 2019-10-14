@@ -91,11 +91,22 @@ class App extends React.Component {
     }
   }
 
+  calculatePrice() {
+    const { basePrice, checkIn, checkOut } = this.state;
+    let newPrice;
+    if (checkOut !== 'Check-out' && checkIn !== 'Check-in') {
+      let days = moment(checkOut).diff(moment(checkIn), 'days');
+      newPrice = days * basePrice;
+    }
+    newPrice = newPrice || basePrice;
+    return newPrice;
+  }
+
   render() {
     return (
       <div className="container">
         <div>
-          {this.state.basePrice}
+          {this.calculatePrice()}
           per night
         </div>
         <Dates

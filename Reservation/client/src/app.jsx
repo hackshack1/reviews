@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import request from '../request';
 import Dates from './dates';
+import Guests from './guests';
 
 class App extends React.Component {
   constructor() {
@@ -14,17 +15,23 @@ class App extends React.Component {
       serviceFee: 0,
       taxes: 0,
       maxGuest: 0,
-      guestAmt: 0,
+      guestAmt: 1,
+      adults: 1,
+      children: 0,
+      infants: 0,
       minStayWeekday: 0,
       minStayWeekdend: 0,
       checkIn: 'Check-in',
       checkOut: 'Check-out',
       instantBooked: true,
-      cal: ''
+      cal: '',
+      displayDropdown: false
     };
 
     this.displayCal = this.displayCal.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
+    this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.handleGuestClick = this.handleGuestClick.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +59,38 @@ class App extends React.Component {
     }
   }
 
+  handleDropdownClick(boo) {
+    this.setState({ displayDropdown: boo });
+  }
+
+  handleGuestClick(guest, op) {
+    const { adults, children, infants, guestAmt } = this.state;
+
+    if (adults >= 1 && guest === 'adults') {
+      if (op === 'plus') {
+        this.setState({ adults: adults + 1, guestAmt: guestAmt + 1 });
+      } else if (adults >= 2) {
+        this.setState({ adults: adults - 1, guestAmt: guestAmt - 1 });
+      }
+    }
+
+    if (children >= 0 && guest === 'children') {
+      if (op === 'plus') {
+        this.setState({ children: children + 1, guestAmt: guestAmt + 1 });
+      } else if (children >= 1) {
+        this.setState({ children: children - 1, guestAmt: guestAmt - 1 });
+      }
+    }
+
+    if (infants >= 0 && guest === 'infants') {
+      if (op === 'plus') {
+        this.setState({ infants: infants + 1 });
+      } else if (infants >= 1) {
+        this.setState({ infants: infants - 1 });
+      }
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -66,7 +105,15 @@ class App extends React.Component {
           cal={this.state.cal}
           handleDateClick={this.handleDateClick}
         />
-        <div>guest</div>
+        <Guests
+          guestAmt={this.state.guestAmt}
+          displayDropdown={this.state.displayDropdown}
+          handleDropdownClick={this.handleDropdownClick}
+          handleGuestClick={this.handleGuestClick}
+          adults={this.state.adults}
+          children={this.state.children}
+          infants={this.state.infants}
+        />
         <button type="button">Reserve</button>
       </div>
     );

@@ -10,7 +10,7 @@ class App extends React.Component {
       maxGuests: 0,
       price: 95,
       guestAmt: 0,
-      checkIn: 'Check-in', //MM/DD/YYYY
+      checkIn: 'Check-in',
       checkOut: 'Check-out',
       cal: ''
     };
@@ -30,7 +30,8 @@ class App extends React.Component {
 
     if (cal === 'checkIn') {
       const checkIn = selected;
-      this.setState({ checkIn });
+      const cal = 'checkOut';
+      this.setState({ checkIn, cal });
     } else {
       const checkOut = selected;
       this.setState({ checkOut });

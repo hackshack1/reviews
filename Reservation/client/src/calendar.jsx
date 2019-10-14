@@ -7,17 +7,15 @@ class Calendar extends React.Component {
     super(props);
 
     this.state = {
-      month: moment().format('MMMM YYYY'),
-      weekdays: moment.weekdaysMin(),
-      firstDay: moment()
-        .startOf('month')
-        .format('d'),
-      lastDate: moment()
-        .endOf('month')
-        .format('D')
+      month:
+        this.props.checkIn !== 'Check-in'
+          ? moment(this.props.checkIn)
+          : moment(),
+      weekdays: moment.weekdaysMin()
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleMonthClick = this.handleMonthClick.bind(this);
   }
 
   componentDidMount() {
@@ -35,7 +33,18 @@ class Calendar extends React.Component {
     }
   }
 
-  createDays(firstDay, lastDate) {
+  handleMonthClick(arrow) {
+    let month =
+      arrow === 'left'
+        ? this.state.month.subtract(1, 'month')
+        : this.state.month.add(1, 'month');
+
+    this.setState({ month });
+  }
+
+  createDays(month) {
+    const firstDay = month.startOf('month').format('d');
+    const lastDate = month.endOf('month').format('D');
     const days = [];
     const rows = [];
     let start = 0;
@@ -50,7 +59,7 @@ class Calendar extends React.Component {
           cal={this.props.cal}
           handleDateClick={this.props.handleDateClick}
           key={k}
-          month={this.state.month}
+          month={month.format('MMMM YYYY')}
           day={k}
         />
       );
@@ -72,7 +81,21 @@ class Calendar extends React.Component {
   render() {
     return (
       <div ref={node => (this.node = node)} className="calendar">
-        <section>{this.state.month}</section>
+        <button
+          onClick={() => {
+            this.handleMonthClick('left');
+          }}
+        >
+          left
+        </button>
+        <section>{this.state.month.format('MMMM YYYY')}</section>
+        <button
+          onClick={() => {
+            this.handleMonthClick('right');
+          }}
+        >
+          right
+        </button>
         <table>
           <thead>
             <tr>
@@ -81,9 +104,7 @@ class Calendar extends React.Component {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {this.createDays(this.state.firstDay, this.state.lastDate)}
-          </tbody>
+          <tbody>{this.createDays(this.state.month)}</tbody>
         </table>
       </div>
     );

@@ -64,28 +64,30 @@ class App extends React.Component {
   }
 
   handleGuestClick(guest, op) {
-    const { adults, children, infants, guestAmt } = this.state;
+    const { adults, children, infants, guestAmt, maxGuest } = this.state;
 
-    if (adults >= 1 && guest === 'adults') {
-      if (op === 'plus') {
-        this.setState({ adults: adults + 1, guestAmt: guestAmt + 1 });
-      } else if (adults >= 2) {
-        this.setState({ adults: adults - 1, guestAmt: guestAmt - 1 });
+    if (guestAmt <= maxGuest) {
+      if (adults >= 1 && guest === 'adults') {
+        if (op === 'plus' && guestAmt < maxGuest) {
+          this.setState({ adults: adults + 1, guestAmt: guestAmt + 1 });
+        } else if (op === 'minus' && adults >= 2) {
+          this.setState({ adults: adults - 1, guestAmt: guestAmt - 1 });
+        }
       }
-    }
 
-    if (children >= 0 && guest === 'children') {
-      if (op === 'plus') {
-        this.setState({ children: children + 1, guestAmt: guestAmt + 1 });
-      } else if (children >= 1) {
-        this.setState({ children: children - 1, guestAmt: guestAmt - 1 });
+      if (children >= 0 && guest === 'children') {
+        if (op === 'plus' && guestAmt < maxGuest) {
+          this.setState({ children: children + 1, guestAmt: guestAmt + 1 });
+        } else if (op === 'minus' && children >= 1) {
+          this.setState({ children: children - 1, guestAmt: guestAmt - 1 });
+        }
       }
     }
 
     if (infants >= 0 && guest === 'infants') {
       if (op === 'plus') {
         this.setState({ infants: infants + 1 });
-      } else if (infants >= 1) {
+      } else if (op === 'minus' && infants >= 1) {
         this.setState({ infants: infants - 1 });
       }
     }

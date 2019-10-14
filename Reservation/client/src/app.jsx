@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import Dates from './dates.jsx';
 
 class App extends React.Component {
@@ -9,16 +10,31 @@ class App extends React.Component {
       maxGuests: 0,
       price: 95,
       guestAmt: 0,
-      checkIn: 'Check-in',
+      checkIn: 'Check-in', //MM/DD/YYYY
       checkOut: 'Check-out',
       cal: ''
     };
 
     this.displayCal = this.displayCal.bind(this);
+    this.handleDateClick = this.handleDateClick.bind(this);
   }
 
   displayCal(cal) {
     this.setState({ cal });
+  }
+
+  handleDateClick(cal, month, date) {
+    const selected = moment(`${month} ${date}`, 'MMMM-YYYY-DD').format(
+      'MM/DD/YYYY'
+    );
+
+    if (cal === 'checkIn') {
+      const checkIn = selected;
+      this.setState({ checkIn });
+    } else {
+      const checkOut = selected;
+      this.setState({ checkOut });
+    }
   }
 
   render() {
@@ -33,6 +49,7 @@ class App extends React.Component {
           checkOut={this.state.checkOut}
           displayCal={this.displayCal}
           cal={this.state.cal}
+          handleDateClick={this.handleDateClick}
         />
         <div>guest</div>
         <button type="button">Reserve</button>

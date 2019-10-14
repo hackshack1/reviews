@@ -21,10 +21,18 @@ const Dates = props => (
       value={props.checkOut}
     />
     {props.cal === 'checkIn' ? (
-      <Calendar displayCal={props.displayCal} />
+      <Calendar
+        cal={props.cal}
+        handleDateClick={props.handleDateClick}
+        displayCal={props.displayCal}
+      />
     ) : null}
     {props.cal === 'checkOut' ? (
-      <Calendar displayCal={props.displayCal} />
+      <Calendar
+        cal={props.cal}
+        handleDateClick={props.handleDateClick}
+        displayCal={props.displayCal}
+      />
     ) : null}
   </div>
 );

@@ -30,9 +30,7 @@ class Calendar extends React.Component {
 
   handleClick(e) {
     let node = this.node;
-    if (node.contains(e.target)) {
-      console.log('clicked');
-    } else {
+    if (!node.contains(e.target)) {
       this.props.displayCal('');
     }
   }
@@ -47,7 +45,15 @@ class Calendar extends React.Component {
       days.push(<Day key={`b${k}`} day="" />);
     }
     for (let k = 1; k <= lastDate; k++) {
-      days.push(<Day key={k} month={this.state.month} day={k} />);
+      days.push(
+        <Day
+          cal={this.props.cal}
+          handleDateClick={this.props.handleDateClick}
+          key={k}
+          month={this.state.month}
+          day={k}
+        />
+      );
     }
 
     for (let k = 0; k < 5; k++) {
@@ -65,7 +71,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div ref={node => (this.node = node)}>
+      <div ref={node => (this.node = node)} className="calendar">
         <section>{this.state.month}</section>
         <table>
           <thead>

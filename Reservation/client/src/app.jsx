@@ -108,7 +108,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <div>
-          {this.calculatePrice()}
+          {this.state.basePrice}
           per night
         </div>
         <Dates

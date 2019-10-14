@@ -1,13 +1,13 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, '/client/index.jsx'),
+  entry: path.join(__dirname, '/client/index.jsx'),
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.join(__dirname, 'public')
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.json', '.css', '.scss']
   },
   module: {
     rules: [
@@ -22,6 +22,6 @@ module.exports = {
         }
       }
     ]
-  }, 
-  mode: 'development', //Development: slower but bigger package, when need to deploy, change to production. It will be smaller but faster. 
+  },
+  mode: 'development' //Development: slower but bigger package, when need to deploy, change to production. It will be smaller but faster.
 };

@@ -1,18 +1,11 @@
 const Sequelize = require('sequelize');
 const config = require('../config.js');
+
 const pw = config.sqlPW || '';
 
 const db = new Sequelize('air6n6', 'root', pw, {
   dialect: 'mysql'
 });
-
-db.authenticate()
-  .then(() => {
-    console.log('Connected to mysql');
-  })
-  .catch(error => {
-    console.errror('unable to connect', error);
-  });
 
 const Listing = db.define('listing', {
   id: {

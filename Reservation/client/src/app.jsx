@@ -3,6 +3,7 @@ import moment from 'moment';
 import request from '../request';
 import Dates from './dates';
 import Guests from './guests';
+import TotalPrice from './totalPrice';
 
 class App extends React.Component {
   constructor() {
@@ -10,6 +11,7 @@ class App extends React.Component {
     this.state = {
       reservations: [],
       basePrice: 0,
+      newPrice: 0,
       cleaningFee: 0,
       discount: 0,
       serviceFee: 0,
@@ -23,15 +25,18 @@ class App extends React.Component {
       minStayWeekdend: 0,
       checkIn: 'Check-in',
       checkOut: 'Check-out',
+      nights: 0,
       instantBooked: true,
       cal: '',
-      displayDropdown: false
+      displayDropdown: false,
+      displayTotal: false
     };
 
     this.displayCal = this.displayCal.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleGuestClick = this.handleGuestClick.bind(this);
+    this.calculatePrice = this.calculatePrice.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +60,7 @@ class App extends React.Component {
       this.setState({ checkIn, cal });
     } else {
       const checkOut = selected;
-      this.setState({ checkOut });
+      this.setState({ checkOut }, this.calculatePrice);
     }
   }
 
@@ -95,13 +100,15 @@ class App extends React.Component {
 
   calculatePrice() {
     const { basePrice, checkIn, checkOut } = this.state;
+    let displayTotal = true;
     let newPrice;
+    let nights;
     if (checkOut !== 'Check-out' && checkIn !== 'Check-in') {
-      let days = moment(checkOut).diff(moment(checkIn), 'days');
-      newPrice = days * basePrice;
+      nights = moment(checkOut).diff(moment(checkIn), 'days');
+      newPrice = nights * basePrice;
     }
-    newPrice = newPrice || basePrice;
-    return newPrice;
+
+    this.setState({ newPrice, nights, displayTotal });
   }
 
   render() {
@@ -127,6 +134,16 @@ class App extends React.Component {
           children={this.state.children}
           infants={this.state.infants}
         />
+        {this.state.displayTotal ? (
+          <TotalPrice
+            basePrice={this.state.basePrice}
+            newPrice={this.state.newPrice}
+            nights={this.state.nights}
+            serviceFee={this.state.serviceFee}
+            taxes={this.state.taxes}
+            cleaningFee={this.state.cleaningFee}
+          />
+        ) : null}
         <button type="button">Reserve</button>
       </div>
     );

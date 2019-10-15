@@ -21,6 +21,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-styled-components": "^1.10.6",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.5.1",
@@ -48,7 +49,8 @@
     "path": "^0.12.7",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "sequelize": "^5.19.5"
+    "sequelize": "^5.19.5",
+    "styled-components": "^4.4.0"
   },
   "jest": {
     "setupFilesAfterEnv": [

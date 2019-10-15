@@ -1,11 +1,48 @@
 import React from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
 import request from '../request';
 import Dates from './dates';
 import Guests from './guests';
 import TotalPrice from './totalPrice';
 
-class App extends React.Component {
+const Wrapper = styled.div`
+  border: 1px solid #dedede;
+  font-family: 'Montserrat', sans-serif;
+  display: grid;
+  width: 300px;
+  float: right;
+  padding: 15px;
+  margin: 5px;
+  grid-gap: 5px;
+`;
+
+const Price = styled.section`
+  font-size: 0.5em;
+  font-weight: 400;
+  padding: 5px;
+  padding-bottom: 20px;
+  justify-self: start;
+  border-bottom: 1px solid #dedede;
+`;
+
+const Rate = styled.span`
+  font-size: 4em;
+  font-weight: 700;
+`;
+
+const ReserveButton = styled.button`
+  background-color: #f25764;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px
+  font-weight: 500;
+  padding: 10px;
+  margin: 5px;
+`;
+
+export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -113,11 +150,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div>
-          {this.state.basePrice}
+      <Wrapper>
+        <Price>
+          <Rate>${this.state.basePrice}</Rate>
           per night
-        </div>
+        </Price>
         <Dates
           checkIn={this.state.checkIn}
           checkOut={this.state.checkOut}
@@ -144,10 +181,8 @@ class App extends React.Component {
             cleaningFee={this.state.cleaningFee}
           />
         ) : null}
-        <button type="button">Reserve</button>
-      </div>
+        <ReserveButton>Reserve</ReserveButton>
+      </Wrapper>
     );
   }
 }
-
-export default App;

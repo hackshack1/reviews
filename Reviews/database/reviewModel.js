@@ -3,10 +3,7 @@ const mongoose = require ('mongoose');
 
 
 var reviewsSchema = new mongoose.Schema ({
-    listing: {
-        listingID: String,
-        listingName: String,
-    },
+    listingID: String,
     host: {
         hostID: String,
         hostName: String,
@@ -21,7 +18,7 @@ var reviewsSchema = new mongoose.Schema ({
         cleanliness: Number,
         value: Number,
     },
-    review:[{
+    reviews:[{
         customer:{
             customerID: String,
             customerName: String,

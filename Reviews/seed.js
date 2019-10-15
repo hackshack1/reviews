@@ -1,14 +1,12 @@
 const {Reviews} = require('./database/reviewModel.js');
+const dummyData = require('./dummyData.js')
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/reviews',{useNewUrlParser:true});
 
 var generateNewReview = () => {
     return new Reviews({
-        listing: {
-            listingID: '000001',
-            listingName: 'Beautiful Country Home',
-        },
+        listingID: '000001',
         host: {
             hostID: 'H00001',
             hostName: 'Jimmy',
@@ -23,25 +21,26 @@ var generateNewReview = () => {
             cleanliness: 4,
             value: 5,
         },
-        review:[{
-            customer:{
-                customerID: 'C00001',
-                customerName: 'Howard',
-                customerPhoto: 'photo url',
-            },
-            ratings:{
-                communication: 4,
-                checkIn: 5,
-                location: 4,
-                accuracy: 5,
-                cleanliness: 4,
-                value: 5,
-            },
-            body: 'Great place to stay!',
-            bodyDate: new Date(),
-            response: 'Thanks for the review',
-            responseDate: new Date(),
-        }]
+        reviews:dummyData
+        // reviews:[{
+        //     customer:{
+        //         customerID: 'C00001',
+        //         customerName: 'Howard',
+        //         customerPhoto: 'photo url',
+        //     },
+        //     ratings:{
+        //         communication: 4,
+        //         checkIn: 5,
+        //         location: 4,
+        //         accuracy: 5,
+        //         cleanliness: 4,
+        //         value: 5,
+        //     },
+        //     body: 'Great place to stay!',
+        //     bodyDate: new Date(),
+        //     response: 'Thanks for the review',
+        //     responseDate: new Date(),
+        // }]
     })
 }
 

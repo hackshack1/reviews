@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const controller = require('./controllers/controller.js')
-const db = require("./src/database/connection");
+const db = require('../database/connection.js');
 
 const bodyParser = require('body-parser')
 

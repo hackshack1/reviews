@@ -1,6 +1,32 @@
 import React from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
 import Day from './day';
+
+const Wrapper = styled.div`
+  border: 1px solid #dedede;
+  background: white;
+  z-index: 2;
+  position: absolute;
+  width: 270px;
+  margin: 10px;
+
+  :after {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #dedede;
+    border-right: 0px solid #dedede;
+    border-bottom: 0px solid #dedede;
+    border-left: 1px solid #dedede;
+    bottom: 100%;
+    left: ${props => (props.cal === 'checkIn' ? '10%' : '60%')}
+    content: '';
+    transform: rotate(45deg);
+    margin-bottom: -5px;
+    background: white;
+  }
+`;
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -80,7 +106,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div ref={node => (this.node = node)} className="calendar">
+      <Wrapper ref={node => (this.node = node)} cal={this.props.cal}>
         <button
           onClick={() => {
             this.handleMonthClick('left');
@@ -106,7 +132,7 @@ class Calendar extends React.Component {
           </thead>
           <tbody>{this.createDays(this.state.month)}</tbody>
         </table>
-      </div>
+      </Wrapper>
     );
   }
 }

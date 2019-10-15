@@ -9,6 +9,8 @@ import TotalPrice from './totalPrice';
 const Wrapper = styled.div`
   border: 1px solid #dedede;
   font-family: 'Montserrat', sans-serif;
+  position: relative;
+  z-index: 0;
   display: grid;
   width: 300px;
   float: right;

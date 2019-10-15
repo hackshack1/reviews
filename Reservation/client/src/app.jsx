@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   float: right;
   padding: 15px;
   margin: 5px;
-  grid-gap: 5px;
+  grid-gap: 15px;
 `;
 
 const Price = styled.section`

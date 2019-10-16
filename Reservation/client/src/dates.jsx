@@ -27,7 +27,12 @@ const Input = styled.input`
   margin: 5px;
   padding: 3px;
   border: none;
-
+  ${props =>
+    props.cal === 'checkOut'
+      ? `background-color: #a0f2ea;
+  outline: none;
+  border-radius: 3px;`
+      : null}
   :focus {
     background-color: #a0f2ea;
     outline: none;
@@ -78,6 +83,7 @@ const Dates = props => (
         ></line>
       </svg>
       <Input
+        cal={props.cal}
         onClick={() => {
           props.displayCal('checkOut');
         }}
@@ -97,6 +103,7 @@ const Dates = props => (
     ) : null}
     {props.cal === 'checkOut' ? (
       <Calendar
+        reservations={props.reservations}
         checkIn={props.checkIn}
         cal={props.cal}
         handleDateClick={props.handleDateClick}

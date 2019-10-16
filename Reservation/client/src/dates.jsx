@@ -88,6 +88,7 @@ const Dates = props => (
     </InputWrapper>
     {props.cal === 'checkIn' ? (
       <Calendar
+        reservations={props.reservations}
         checkIn={props.checkIn}
         cal={props.cal}
         handleDateClick={props.handleDateClick}

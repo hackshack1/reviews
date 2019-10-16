@@ -97,7 +97,9 @@ class Calendar extends React.Component {
         this.props.checkIn !== 'Check-in'
           ? moment(this.props.checkIn)
           : moment(),
-      weekdays: moment.weekdaysMin()
+      weekdays: moment.weekdaysMin(),
+      today: moment().format('MMMM-YYYY-DD'),
+      unavailableDays: []
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -106,10 +108,25 @@ class Calendar extends React.Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
+    this.checkReservation();
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  checkReservation() {
+    let unavailableDays = [];
+    this.props.reservations.forEach(rsvp => {
+      for (let k = 0; k < rsvp.totalNights; k++) {
+        let day = moment(rsvp.checkIn, 'YYYY-MM-DD')
+          .add(k, 'days')
+          .format('MM/DD/YYYY');
+        unavailableDays.push(day);
+      }
+    });
+    console.log(unavailableDays);
+    this.setState({ unavailableDays });
   }
 
   handleClick(e) {
@@ -139,7 +156,24 @@ class Calendar extends React.Component {
     for (let k = 0; k < firstDay; k++) {
       days.push(<Day key={`b${k}`} day="" />);
     }
+
     for (let k = 1; k <= lastDate; k++) {
+      let unavailable = false;
+      let hasDay = false;
+      let day = moment(`${month.format('MMMM YYYY')} ${k}`, 'MMMM-YYYY-DD');
+
+      if (this.state.unavailableDays.includes(day.format('MM/DD/YYYY'))) {
+        hasDay = true;
+      }
+
+      if (
+        day.isBefore(this.state.today) ||
+        day.isSame(this.state.today) ||
+        hasDay
+      ) {
+        unavailable = true;
+      }
+
       days.push(
         <Day
           cal={this.props.cal}
@@ -147,6 +181,7 @@ class Calendar extends React.Component {
           key={k}
           month={month.format('MMMM YYYY')}
           day={k}
+          unavailable={unavailable}
         />
       );
     }

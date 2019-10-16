@@ -12,7 +12,7 @@ app.use(express.json())
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/reviews',(req, res)=>{
     controller.getAll(req, res);

@@ -11144,16 +11144,18 @@ var HomesRecommendation = function (_React$Component) {
   }, {
     key: 'nextThree',
     value: function nextThree(event) {
+      // event.preventDefault();
       var newIndex = this.state.currIndex + 1;
       var threeListings = this.state.allListings.slice(newIndex, newIndex + 3);
-      this.setState({ pageListings: threeListings });
+      this.setState({ pageListings: threeListings, currIndex: newIndex });
     }
   }, {
     key: 'prevThree',
     value: function prevThree(event) {
+      // event.preventDefault();
       var newIndex = this.state.currIndex - 1;
       var threeListings = this.state.allListings.slice(newIndex, newIndex + 3);
-      this.setState({ pageListings: threeListings });
+      this.setState({ pageListings: threeListings, currIndex: newIndex });
     }
   }, {
     key: 'render',
@@ -11166,11 +11168,6 @@ var HomesRecommendation = function (_React$Component) {
         _react2.default.createElement('button', { id: 'outterLeftArrow', onClick: function onClick() {
             return _this3.prevThree();
           }, disabled: this.state.currIndex === 0 }),
-        _react2.default.createElement(
-          'p',
-          null,
-          'React is working'
-        ),
         _react2.default.createElement(_Listings2.default, { pageListings: this.state.pageListings }),
         _react2.default.createElement('button', { id: 'outterRightArrow', onClick: function onClick() {
             return _this3.nextThree();

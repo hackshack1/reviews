@@ -32,15 +32,17 @@ class HomesRecommendation extends React.Component {
   // }
 
   nextThree (event) {
+    // event.preventDefault();
     const newIndex = this.state.currIndex+1;
     const threeListings = this.state.allListings.slice(newIndex, newIndex+3);
-    this.setState({pageListings: threeListings});
+    this.setState({pageListings: threeListings, currIndex:newIndex});
   }
 
   prevThree (event) {
+    // event.preventDefault();
     const newIndex = this.state.currIndex-1;
     const threeListings = this.state.allListings.slice(newIndex, newIndex+3);
-    this.setState({pageListings: threeListings});
+    this.setState({pageListings: threeListings, currIndex:newIndex});
   }
 
 
@@ -49,7 +51,6 @@ class HomesRecommendation extends React.Component {
     return (
       <div>
         <button id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}></button>
-        <p>React is working</p>
         <Listings pageListings={this.state.pageListings}/>
         <button id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-1}></button>
       </div>

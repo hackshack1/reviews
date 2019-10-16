@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+.reviewBox {
+    padding: 30px;
+    box-sizing: border-box;
+    color: rgb(72, 72, 72);
+    display: block;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size:14px;
+    line-height: 20.02px;
+    text-size-adjust: 100%;
+}
+.profileBox {
+    padding: 5px;
+    box-sizing: border-box;
+    color: rgb(72, 72, 72);
+    display: flex;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size:14px;
+    line-height: 20.02px;
+    text-size-adjust: 100%;
+}
+.customerName {
+    box-sizing: border-box;
+    color: rgb(72, 72, 72);
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    overflow-wrap: break-word;
+    text-size-adjust: 100%;
+}
+.date {
+    font-size: 12px;
+}
+
+.customerPhoto {
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 47.9861px;
+    width: 47.9861px
+}
+.bodyBox{
+    /* max-width: 594px; */
+    box-sizing: border-box;
+    color: rgb(72, 72, 72);
+    display: block;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 20.02px;
+    margin-top: 16px;
+    text-size-adjust: 100%;
+    overflow-wrap: break-word;
+}
+
+.body {
+
+}

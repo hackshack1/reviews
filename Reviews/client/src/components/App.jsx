@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'Axios';
 import Reviews from './Reviews.jsx'
+import styles from '../../styles/App.css'
 
 
 class App extends React.Component {
@@ -31,9 +32,12 @@ getData(){
 
     return (
       <div>
-        <h1>Reviews</h1>
-        <Reviews reviews={this.state.reviews}/>
-
+        <div className={styles.head}>
+          <h1>Reviews</h1>
+        </div>
+        <div className={styles.main}>
+          <Reviews reviews={this.state.reviews}/>
+        </div>
       </div>
     )
   }

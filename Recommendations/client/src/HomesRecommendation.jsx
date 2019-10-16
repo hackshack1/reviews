@@ -52,7 +52,7 @@ class HomesRecommendation extends React.Component {
       <div>
         <button id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}></button>
         <Listings pageListings={this.state.pageListings}/>
-        <button id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-1}></button>
+        <button id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-3}></button>
       </div>
     );
   }

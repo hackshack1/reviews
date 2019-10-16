@@ -11,19 +11,16 @@ module.exports = {
     path: DIST_DIR
   },
   module : {
-    // rules: [
-    //   {
-    //     test: /\.css$/i,
-    //     use: ['style-loader', 'css-loader']
-    //   }
-    // ],
     loaders : [
       {
         test : /\.jsx?/,
         include : SRC_DIR,
         loader : 'babel-loader',
         query: {
-          presets: ['react', 'env']
+          presets: ['react', 'env'],
+          plugins: [
+            'babel-plugin-styled-components'
+          ]
        }
       }
     ]

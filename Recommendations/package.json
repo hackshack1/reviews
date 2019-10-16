@@ -9,15 +9,15 @@
     "react-dev": "webpack --watch",
     "db": "mysql -u root < ./schema.sql",
     "seedData": "node database/seed.js",
-    "carousel": "npm install react-responsive-carousel --save",
-    "cssloader": "npm install --save-dev css-loader",
-    "style": "npm install --save styled-components"
+    "style": "npm install --save styled-components",
+    "babel": "npm install --save-dev babel-plugin-styled-components"
   },
   "author": "Bacai",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-styled-components": "^1.10.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.23.0",
     "css-loader": "^3.2.0",
@@ -33,7 +33,6 @@
     "nodemon": "^1.19.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-responsive-carousel": "^3.1.50",
     "styled-components": "^4.4.0"
   }
 }

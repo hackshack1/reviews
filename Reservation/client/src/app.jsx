@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 0;
   display: grid;
-  width: 300px;
+  width: 370px;
   float: right;
   padding: 15px;
-  margin: 5px;
+  margin: 20px 30px;
   grid-gap: 15px;
 `;
 
@@ -158,6 +158,7 @@ export default class App extends React.Component {
           per night
         </Price>
         <Dates
+          reservations={this.state.reservations}
           checkIn={this.state.checkIn}
           checkOut={this.state.checkOut}
           displayCal={this.displayCal}

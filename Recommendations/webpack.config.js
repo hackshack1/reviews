@@ -1,6 +1,7 @@
   var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
+
 //just think of __dirname as a '.', it's always in the root directory so there's never a reason to need '..'
 
 module.exports = {
@@ -10,6 +11,12 @@ module.exports = {
     path: DIST_DIR
   },
   module : {
+    // rules: [
+    //   {
+    //     test: /\.css$/i,
+    //     use: ['style-loader', 'css-loader']
+    //   }
+    // ],
     loaders : [
       {
         test : /\.jsx?/,

@@ -17,6 +17,7 @@ app.get("/allHomes", (req,res) => {
     if (err) {
       res.status(500).send(err);
     } else {
+      console.log('SENT')
       res.status(200).send(dbObj);
     }
   })

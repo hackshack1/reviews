@@ -1,7 +1,25 @@
 import React from 'react';
 import Axios from 'Axios';
 import Reviews from './Reviews.jsx';
+import styled from 'styled-components';
 
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: center;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25em;
+  color: #484848;
+  padding-top: 2px;
+  padding-bottom: 2px;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -30,14 +48,10 @@ getData(){
   render() {
 
     return (
-      <div>
-        <div>
-          <h1>Reviews</h1>
-        </div>
-        <div>
-          <Reviews reviews={this.state.reviews}/>
-        </div>
-      </div>
+      <Wrapper>
+        <Head>Reviews</Head>
+        <Reviews reviews={this.state.reviews}/>
+      </Wrapper>
     )
   }
 }

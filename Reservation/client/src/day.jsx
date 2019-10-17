@@ -9,12 +9,14 @@ const Cell = styled.td`
         color: white;`
       : props.unavailable
       ? `text-decoration: line-through #dedede; 
-      color: #dedede;`
+      color: #dedede;
+      :hover {cursor: default;}`
       : props.cal === 'checkIn'
       ? `:hover {
         background-color: #E4E7E7;
-      }`
-      : null}
+        cursor: pointer;
+      };`
+      : `:hover {cursor: pointer;}`}
   ${props =>
     props.isHover
       ? `background-color: #B3F1EC;
@@ -29,7 +31,7 @@ const Day = props => (
     isSelected={props.isSelected}
     isHover={props.isHover}
     onClick={() => {
-      !props.unavailable
+      !props.unavailable && !props.isSelected
         ? props.handleDateClick(props.cal, props.month, props.day)
         : null;
     }}

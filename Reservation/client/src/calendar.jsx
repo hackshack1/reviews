@@ -163,7 +163,10 @@ class Calendar extends React.Component {
   }
 
   handleDaysHover(month, day, cal) {
-    if (this.props.checkIn !== 'Check-in') {
+    if (
+      this.props.checkIn !== 'Check-in' &&
+      this.props.checkOut === 'Check-out'
+    ) {
       const hovered = moment(`${month} ${day}`, 'MMMM-YYYY-DD');
       const checkIn = moment(this.props.checkIn);
       let hoverDays = [];
@@ -218,6 +221,11 @@ class Calendar extends React.Component {
 
     for (let k = 1; k <= lastDate; k++) {
       let day = moment(`${month.format('MMMM YYYY')} ${k}`, 'MMMM-YYYY-DD');
+      let isCheckIn =
+        this.props.checkIn !== 'Check-in'
+          ? day.isSame(this.props.checkIn)
+          : false;
+
       let hasDay = this.state.unavailableDays.includes(
         day.format('MM/DD/YYYY')
       );
@@ -242,6 +250,7 @@ class Calendar extends React.Component {
 
       days.push(
         <Day
+          isCheckIn={isCheckIn}
           isHover={isHover}
           isSelected={isSelected}
           cal={this.props.cal}

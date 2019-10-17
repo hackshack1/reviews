@@ -7,7 +7,7 @@ const Cell = styled.td`
     props.unavailable
       ? `text-decoration: line-through #dedede; 
       color: #dedede;`
-      : props.checkInSelected
+      : props.isCheckIn
       ? `background-color: #02A699;
         color: white;`
       : props.cal === 'checkIn'
@@ -16,7 +16,7 @@ const Cell = styled.td`
       }`
       : null}
   ${props =>
-    props.isMinStay
+    props.isHover
       ? `background-color: #B3F1EC;
       color: white;`
       : null}
@@ -26,15 +26,17 @@ const Day = props => (
   <Cell
     unavailable={props.unavailable}
     cal={props.cal}
-    checkInSelected={props.checkInSelected}
-    isMinStay={props.isMinStay}
+    isCheckIn={props.isCheckIn}
+    isHover={props.isHover}
     onClick={() => {
       !props.unavailable
         ? props.handleDateClick(props.cal, props.month, props.day)
         : null;
     }}
     onMouseOver={() => {
-      props.checkInSelected ? props.handleSelectedHover() : null;
+      !props.unavailable
+        ? props.handleMinDaysHover(props.month, props.day, props.cal)
+        : null;
     }}
     onMouseLeave={props.handleMouseLeave}
   >

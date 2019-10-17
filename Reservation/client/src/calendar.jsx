@@ -1,6 +1,89 @@
 import React from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
 import Day from './day';
+
+const Wrapper = styled.div`
+  border: 1px solid #dedede;
+  background: white;
+  z-index: 1;
+  position: absolute;
+  width: 270px;
+  margin: 10px;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 20% 1fr 20%;
+  grid-template-columns: 10% 1fr 10%;
+
+  :after {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #dedede;
+    border-right: 0px solid #dedede;
+    border-bottom: 0px solid #dedede;
+    border-left: 1px solid #dedede;
+    bottom: 100%;
+    left: ${props => (props.cal === 'checkIn' ? '10%' : '60%')}
+    content: '';
+    transform: rotate(45deg);
+    margin-bottom: -5px;
+    background: white;
+  }
+
+  h2 {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: center;
+    margin: 20px 0px; 
+    font-weight: 600;
+  }
+`;
+
+const Button = styled.button`
+  grid-row: 1;
+  grid-column: 2;
+  margin: 10px 0px;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  text-align: center;
+`;
+
+const LeftButton = styled(Button)`
+  justify-self: start;
+`;
+
+const RightButton = styled(Button)`
+  justify-self: right;
+`;
+
+const Table = styled.table`
+  grid-row: 2;
+  grid-column: 2;
+  margin: 15px 0;
+  text-align: center;
+  empty-cells: hide;
+  width: auto;
+  border-collapse: separate;
+  empty-cells: hide;
+
+  th {
+    height: 20px
+    font-size: 12px;
+  }
+
+  td {
+    border: 0.5px solid #dedede;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: 500;
+  }
+`;
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -80,23 +163,23 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div ref={node => (this.node = node)} className="calendar">
-        <button
+      <Wrapper ref={node => (this.node = node)} cal={this.props.cal}>
+        <LeftButton
           onClick={() => {
             this.handleMonthClick('left');
           }}
         >
           left
-        </button>
-        <section>{this.state.month.format('MMMM YYYY')}</section>
-        <button
+        </LeftButton>
+        <h2>{this.state.month.format('MMMM YYYY')}</h2>
+        <RightButton
           onClick={() => {
             this.handleMonthClick('right');
           }}
         >
           right
-        </button>
-        <table>
+        </RightButton>
+        <Table>
           <thead>
             <tr>
               {this.state.weekdays.map(day => (
@@ -105,8 +188,8 @@ class Calendar extends React.Component {
             </tr>
           </thead>
           <tbody>{this.createDays(this.state.month)}</tbody>
-        </table>
-      </div>
+        </Table>
+      </Wrapper>
     );
   }
 }

@@ -112,6 +112,7 @@ class Calendar extends React.Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
     this.checkReservation();
+    console.log('its called!');
   }
 
   componentWillUnmount() {
@@ -128,6 +129,22 @@ class Calendar extends React.Component {
         unavailableDays.push(day);
       }
     });
+    if (this.props.cal === 'checkOut') {
+      const selected = moment(this.props.checkIn).day();
+      let minDays =
+        selected >= 1 && selected <= 5
+          ? this.props.minStayWeekday
+          : this.props.minStayWeekend;
+      if (minDays > 1) {
+        for (var k = 1; k < minDays; k++) {
+          let day = moment(this.props.checkIn)
+            .add(k, 'days')
+            .format('MM/DD/YYYY');
+          console.log('min day:', day);
+          unavailableDays.push(day);
+        }
+      }
+    }
     this.setState({ unavailableDays });
   }
 
@@ -149,25 +166,21 @@ class Calendar extends React.Component {
 
   handleSelectedHover() {
     const selected = moment(this.props.checkIn).day();
-    console.log(this.props.minStayWeekday, this.props.minStayWeekend);
     let hoverMinDays = [];
     let minDays =
       selected >= 1 && selected <= 5
         ? this.props.minStayWeekday
         : this.props.minStayWeekend;
 
-    console.log('mindays:', minDays);
     if (minDays > 1) {
-      for (var k = 1; k < minDays; k++) {
+      for (var k = 1; k <= minDays; k++) {
         let day = moment(this.props.checkIn)
           .add(k, 'days')
           .format('MM/DD/YYYY');
         hoverMinDays.push(day);
       }
 
-      this.setState({ hoverMinDays }, () => {
-        console.log(this.state.hoverMinDays);
-      });
+      this.setState({ hoverMinDays });
     }
   }
 
@@ -201,6 +214,10 @@ class Calendar extends React.Component {
         day.isBefore(this.state.today) ||
         day.isSame(this.state.today) ||
         hasDay;
+
+      if (this.props.checkIn !== 'Check-in' && this.props.cal === 'checkOut') {
+        unavailable = day.isBefore(this.props.checkIn) || hasDay;
+      }
 
       days.push(
         <Day

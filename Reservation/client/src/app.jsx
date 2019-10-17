@@ -164,6 +164,8 @@ export default class App extends React.Component {
           displayCal={this.displayCal}
           cal={this.state.cal}
           handleDateClick={this.handleDateClick}
+          minStayWeekday={this.state.minStayWeekday}
+          minStayWeekdend={this.state.minStayWeekdend}
         />
         <Guests
           guestAmt={this.state.guestAmt}

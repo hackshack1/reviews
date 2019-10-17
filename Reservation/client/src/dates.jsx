@@ -99,6 +99,8 @@ const Dates = props => (
         cal={props.cal}
         handleDateClick={props.handleDateClick}
         displayCal={props.displayCal}
+        minStayWeekday={props.minStayWeekday}
+        minStayWeekend={props.minStayWeekend}
       />
     ) : null}
     {props.cal === 'checkOut' ? (
@@ -108,6 +110,8 @@ const Dates = props => (
         cal={props.cal}
         handleDateClick={props.handleDateClick}
         displayCal={props.displayCal}
+        minStayWeekday={props.minStayWeekday}
+        minStayWeekend={props.minStayWeekend}
       />
     ) : null}
   </Wrapper>

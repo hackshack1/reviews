@@ -99,11 +99,14 @@ class Calendar extends React.Component {
           : moment(),
       weekdays: moment.weekdaysMin(),
       today: moment().format('MMMM-YYYY-DD'),
-      unavailableDays: []
+      unavailableDays: [],
+      hoverMinDays: []
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleMonthClick = this.handleMonthClick.bind(this);
+    this.handleSelectedHover = this.handleSelectedHover.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   componentDidMount() {
@@ -125,7 +128,6 @@ class Calendar extends React.Component {
         unavailableDays.push(day);
       }
     });
-    console.log(unavailableDays);
     this.setState({ unavailableDays });
   }
 
@@ -145,6 +147,35 @@ class Calendar extends React.Component {
     this.setState({ month });
   }
 
+  handleSelectedHover() {
+    const selected = moment(this.props.checkIn).day();
+    console.log(this.props.minStayWeekday, this.props.minStayWeekend);
+    let hoverMinDays = [];
+    let minDays =
+      selected >= 1 && selected <= 5
+        ? this.props.minStayWeekday
+        : this.props.minStayWeekend;
+
+    console.log('mindays:', minDays);
+    if (minDays > 1) {
+      for (var k = 1; k < minDays; k++) {
+        let day = moment(this.props.checkIn)
+          .add(k, 'days')
+          .format('MM/DD/YYYY');
+        hoverMinDays.push(day);
+      }
+
+      this.setState({ hoverMinDays }, () => {
+        console.log(this.state.hoverMinDays);
+      });
+    }
+  }
+
+  handleMouseLeave() {
+    const hoverMinDays = [];
+    this.setState({ hoverMinDays });
+  }
+
   createDays(month) {
     const firstDay = month.startOf('month').format('d');
     const lastDate = month.endOf('month').format('D');
@@ -158,26 +189,27 @@ class Calendar extends React.Component {
     }
 
     for (let k = 1; k <= lastDate; k++) {
-      let unavailable = false;
-      let hasDay = false;
       let day = moment(`${month.format('MMMM YYYY')} ${k}`, 'MMMM-YYYY-DD');
-
-      if (this.state.unavailableDays.includes(day.format('MM/DD/YYYY'))) {
-        hasDay = true;
-      }
-
-      if (
+      let hasDay = this.state.unavailableDays.includes(
+        day.format('MM/DD/YYYY')
+      );
+      let isMinStay = this.state.hoverMinDays.includes(
+        day.format('MM/DD/YYYY')
+      );
+      let checkInSelected = this.props.checkIn === day.format('MM/DD/YYYY');
+      let unavailable =
         day.isBefore(this.state.today) ||
         day.isSame(this.state.today) ||
-        hasDay
-      ) {
-        unavailable = true;
-      }
+        hasDay;
 
       days.push(
         <Day
+          isMinStay={isMinStay}
+          checkInSelected={checkInSelected}
           cal={this.props.cal}
           handleDateClick={this.props.handleDateClick}
+          handleSelectedHover={this.handleSelectedHover}
+          handleMouseLeave={this.handleMouseLeave}
           key={k}
           month={month.format('MMMM YYYY')}
           day={k}

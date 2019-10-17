@@ -4,8 +4,10 @@ import styled from 'styled-components';
 const RatingIcon = (props) => (<span>★</span>)
 
 const RatingBox =styled.div`
-display: flex;
-justify-content: left;
+    display: flex;
+    justify-content: start;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    color: rgb(72, 72, 72);
 `;
 
 const Sprite = styled.div`
@@ -23,11 +25,14 @@ const Sprite = styled.div`
 const AvgRating = styled.div`
     display: flex;
     justify-content: left;
-    color: rgb(72, 72, 72);
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
     font-size:14px;
     font-weight:500;
   `;
+const ReviewCount = styled.div`
+    padding-left: 10px;
+    font-size:14px;
+    font-weight:500;
+`;
 
 
 class Rating extends React.Component {
@@ -59,6 +64,9 @@ class Rating extends React.Component {
                 <div>
                     <AvgRating>{this.state.rating}</AvgRating>
                 </div>
+                <ReviewCount>
+                    20 Reviews
+                </ReviewCount>
             </RatingBox>
         )
     }

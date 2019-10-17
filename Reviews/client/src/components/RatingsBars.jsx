@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const RatingBox = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    color: rgb(72, 72, 72);
 `;
 
 const RatingBarBoxLeft =styled.div`
@@ -20,14 +22,25 @@ const RatingBarBoxRight =styled.div`
     font-size:12px;
 `;
 
-const RatingNameLine = styled.div`
+const RatingLineScore = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-left: 70px;
+    `;
 
-`;
 
+const RatingContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    `;
 const RatingsBarStyle = styled.div`
+    display: flex;
+    align-self: center;
     height: 3px;
     width: 80px;
-    border: 1px solid #333;
+    // border: 1px solid #333;
+    background-color: var(--color-accent-light-gray, #D8D8D8) !important;
   `;
 
 const BarFiller = styled.div`
@@ -36,6 +49,10 @@ const BarFiller = styled.div`
     border-radius: inherit;
     transition: width .2s ease-in;
   `;
+
+  const Score = styled.div`
+  padding-left: 5px;
+`;
 
 
   class RatingsBars extends React.Component {
@@ -53,37 +70,55 @@ const BarFiller = styled.div`
       return (
           <RatingBox>
             <RatingBarBoxLeft>
-                <RatingNameLine>
+                <RatingContainer>
                     <div>Accuracy</div>
-                    <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                </RatingNameLine>
+                    <RatingLineScore>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
 
-                <RatingNameLine>
-                    <div>Cleanliness</div>
-                    <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                </RatingNameLine>
+                <RatingContainer>
+                    <div>Value</div>
+                    <RatingLineScore>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
 
-                <RatingNameLine>
-                    <div>Communication</div>
-                    <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                </RatingNameLine>
+                <RatingContainer>
+                    <div>Location</div>
+                    <RatingLineScore>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
             </RatingBarBoxLeft>
 
             <RatingBarBoxRight>
-                <RatingNameLine>
-                        <div>Location</div>
+                <RatingContainer>
+                    <div>Cleanliness</div>
+                    <RatingLineScore>
                         <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                    </RatingNameLine>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
 
-                    <RatingNameLine>
-                        <div>Value</div>
+                <RatingContainer>
+                    <div>Communication</div>
+                    <RatingLineScore>
                         <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                    </RatingNameLine>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
 
-                    <RatingNameLine>
-                        <div>Check-in</div>
+                <RatingContainer>
+                    <div>Check-in</div>
+                    <RatingLineScore>
                         <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                    </RatingNameLine>
+                        <Score>4.0</Score>
+                    </RatingLineScore>
+                </RatingContainer>
             </RatingBarBoxRight>
           </RatingBox>
       )

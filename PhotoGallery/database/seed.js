@@ -3,16 +3,14 @@ const model = require('./models.js');
 const faker = require('faker');
 
 const ListingImages = model.ListingImages;
-const UserSaves = model.UserSaves;
 const ListingID = model.ListingID;
-const UserID = model.UserID;
 
 let createRecord = (table, mockData) => {
     table.sync()
         .then(() => table.create(mockData));
 };
 
-for (var i = 0; i < 3; i++) {
+for (var i = 1; i < 4; i++) {
     let mockData = {
         id: i
     }
@@ -20,29 +18,14 @@ for (var i = 0; i < 3; i++) {
     createRecord(ListingID, mockData);
 }
 
-for (var i = 0; i < 3; i++) {
-    let mockData = {
-        url: faker.image.imageUrl(),
-        description: faker.lorem.sentence(),
-        listingIdId: i
+for (var i = 1; i < 4; i++) {
+    for (var n = 0; n < 15; n++) {
+        let mockData = {
+            url: faker.image.image(),
+            description: faker.lorem.sentence(),
+            list_id: i
+        }
+    
+        createRecord(ListingImages, mockData);
     }
-
-    createRecord(ListingImages, mockData);
-}
-
-for (var i = 0; i < 3; i++) {
-    let mockData = {
-        id: i
-    }
-
-    createRecord(UserID, mockData);
-}
-
-for (var i = 0; i < 3; i++) {
-    let mockData = {
-        saved_url: faker.image.imageUrl(),
-        userIdId: i
-    }
-
-    createRecord(UserSaves, mockData);
 }

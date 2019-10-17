@@ -23,30 +23,7 @@ db.authenticate()
     })
     .catch((error) => {
         console.error('Unable to connect', error);
-    });
-
-const UserID = db.define('user_id', {
-    id: {
-        type: Sequelize.INTEGER,
-        unique: true,
-        autoIncrement: true,
-        primaryKey: true
-    }
-});
-
-const UserSaves = db.define('user_saves', {
-    id: {
-        type: Sequelize.INTEGER,
-        unique: true,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    saved_url: {
-        type: Sequelize.STRING
-    }
-});
-
-UserSaves.belongsTo(UserID);
+    }); 
 
 const ListingID = db.define('listing_id', {
     id: {
@@ -72,11 +49,9 @@ const ListingImages = db.define('listing_images', {
     }
 });
 
-ListingImages.belongsTo(ListingID);
+ListingImages.belongsTo(ListingID, {foreignKey: 'list_id'});
 
 ListingID.sync();
 ListingImages.sync();
-UserID.sync();
-UserSaves.sync();
 
-module.exports = { ListingImages, UserSaves, UserID, ListingID };    
+module.exports = { ListingImages, ListingID };    

@@ -3,9 +3,7 @@ const mysql = require('mysql2/promise');
 const model = require('./models.js');
 
 const ListingImages = model.ListingImages;
-const UserSaves = model.UserSaves;
 const ListingID = model.ListingID;
-const UserID = model.UserID;
 
 function retrieveAll(callback) {
     ListingImages.findAll()
@@ -13,5 +11,12 @@ function retrieveAll(callback) {
         .catch((error) => callback(error, null));
 }
 
+function retrieveById(id, callback) {
+    ListingImages.findAll({ where: { list_id: id }})
+        .then((result) => callback(null, result))
+        .catch((error) => callback(error, null));
+}
+
 module.exports.retrieveAll = retrieveAll;
+module.exports.retrieveById = retrieveById;
 

@@ -185,7 +185,6 @@ class Calendar extends React.Component {
           }
         }
       } else if (cal === 'checkOut') {
-        console.log('checkin cal hover');
         if (hovered.isAfter(checkIn)) {
           const diff = hovered.diff(checkIn, 'days');
           for (let k = 1; k <= diff; k++) {
@@ -195,7 +194,6 @@ class Calendar extends React.Component {
               .format('MM/DD/YYYY');
             hoverDays.push(day);
           }
-          console.log('hovereddays:', hoverDays);
         }
       }
       this.setState({ hoverDays });
@@ -203,7 +201,6 @@ class Calendar extends React.Component {
   }
 
   handleCheckOutHover(month, day) {
-    console.log('it hovering');
     const selected = moment(this.props.checkIn);
     const hovered = moment(month + day);
     let hoverDays = [];
@@ -213,7 +210,6 @@ class Calendar extends React.Component {
         let day = selected.add(k, 'days').format('MM/DD/YYYY');
         hoverDays.push(day);
       }
-      console.log('hovereddays:', hoverDays);
       this.setState({ hoverDays });
     }
   }
@@ -248,7 +244,13 @@ class Calendar extends React.Component {
         hasDay;
 
       if (this.props.checkIn !== 'Check-in' && this.props.cal === 'checkOut') {
-        unavailable = day.isBefore(this.props.checkIn) || hasDay;
+        const nextRSVPs = this.props.reservations.filter(rsvp =>
+          moment(rsvp.checkIn, 'YYYY-MM-DD').isAfter(moment(this.props.checkIn))
+        );
+        const rsvpdate = nextRSVPs[0] ? nextRSVPs[0].checkIn : null;
+        const hasRSVPd = rsvpdate ? day.isAfter(rsvpdate) : false;
+
+        unavailable = day.isBefore(this.props.checkIn) || hasRSVPd || hasDay;
       }
 
       days.push(

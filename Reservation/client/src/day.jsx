@@ -35,7 +35,9 @@ const Day = props => (
     }}
     onMouseOver={() => {
       !props.unavailable
-        ? props.handleMinDaysHover(props.month, props.day, props.cal)
+        ? props.handleMinDaysHover
+          ? props.handleMinDaysHover(props.month, props.day, props.cal)
+          : null
         : null;
     }}
     onMouseLeave={props.handleMouseLeave}

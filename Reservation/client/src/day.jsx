@@ -4,12 +4,12 @@ import moment from 'moment';
 
 const Cell = styled.td`
   ${props =>
-    props.unavailable
-      ? `text-decoration: line-through #dedede; 
-      color: #dedede;`
-      : props.isCheckIn
+    props.isSelected
       ? `background-color: #02A699;
         color: white;`
+      : props.unavailable
+      ? `text-decoration: line-through #dedede; 
+      color: #dedede;`
       : props.cal === 'checkIn'
       ? `:hover {
         background-color: #E4E7E7;
@@ -26,7 +26,7 @@ const Day = props => (
   <Cell
     unavailable={props.unavailable}
     cal={props.cal}
-    isCheckIn={props.isCheckIn}
+    isSelected={props.isSelected}
     isHover={props.isHover}
     onClick={() => {
       !props.unavailable
@@ -35,8 +35,8 @@ const Day = props => (
     }}
     onMouseOver={() => {
       !props.unavailable
-        ? props.handleMinDaysHover
-          ? props.handleMinDaysHover(props.month, props.day, props.cal)
+        ? props.handleDaysHover
+          ? props.handleDaysHover(props.month, props.day, props.cal)
           : null
         : null;
     }}

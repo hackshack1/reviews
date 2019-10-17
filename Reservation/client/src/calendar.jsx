@@ -100,13 +100,12 @@ class Calendar extends React.Component {
       weekdays: moment.weekdaysMin(),
       today: moment().format('MMMM-YYYY-DD'),
       unavailableDays: [],
-      hoverDays: []
+      hoverDays: [],
+      selectedDays: []
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleMonthClick = this.handleMonthClick.bind(this);
-    this.handleMinDaysHover = this.handleMinDaysHover.bind(this);
-    this.handleCheckOutHover = this.handleCheckOutHover.bind(this);
+    this.handleDaysHover = this.handleDaysHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
@@ -163,7 +162,7 @@ class Calendar extends React.Component {
     this.setState({ month });
   }
 
-  handleMinDaysHover(month, day, cal) {
+  handleDaysHover(month, day, cal) {
     if (this.props.checkIn !== 'Check-in') {
       const hovered = moment(`${month} ${day}`, 'MMMM-YYYY-DD');
       const checkIn = moment(this.props.checkIn);
@@ -200,20 +199,6 @@ class Calendar extends React.Component {
     }
   }
 
-  handleCheckOutHover(month, day) {
-    const selected = moment(this.props.checkIn);
-    const hovered = moment(month + day);
-    let hoverDays = [];
-    if (hovered.isAfter(selected)) {
-      const diff = hovered.diff(selected, 'days');
-      for (let k = 1; k <= diff; k++) {
-        let day = selected.add(k, 'days').format('MM/DD/YYYY');
-        hoverDays.push(day);
-      }
-      this.setState({ hoverDays });
-    }
-  }
-
   handleMouseLeave() {
     const hoverDays = [];
     this.setState({ hoverDays });
@@ -237,7 +222,9 @@ class Calendar extends React.Component {
         day.format('MM/DD/YYYY')
       );
       let isHover = this.state.hoverDays.includes(day.format('MM/DD/YYYY'));
-      let isCheckIn = this.props.checkIn === day.format('MM/DD/YYYY');
+      let isSelected = this.props.selectedDays.includes(
+        day.format('MM/DD/YYYY')
+      );
       let unavailable =
         day.isBefore(this.state.today) ||
         day.isSame(this.state.today) ||
@@ -256,10 +243,11 @@ class Calendar extends React.Component {
       days.push(
         <Day
           isHover={isHover}
-          isCheckIn={isCheckIn}
+          isSelected={isSelected}
           cal={this.props.cal}
           handleDateClick={this.props.handleDateClick}
-          handleMinDaysHover={this.handleMinDaysHover}
+          checkSelected={this.checkSelected}
+          handleDaysHover={this.handleDaysHover}
           handleCheckOutHover={this.handleCheckOutHover}
           handleMouseLeave={this.handleMouseLeave}
           key={k}

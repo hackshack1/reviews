@@ -96,6 +96,8 @@ const Dates = props => (
       <Calendar
         reservations={props.reservations}
         checkIn={props.checkIn}
+        checkOut={props.checkOut}
+        selectedDays={props.selectedDays}
         cal={props.cal}
         handleDateClick={props.handleDateClick}
         displayCal={props.displayCal}
@@ -107,6 +109,8 @@ const Dates = props => (
       <Calendar
         reservations={props.reservations}
         checkIn={props.checkIn}
+        checkOut={props.checkOut}
+        selectedDays={props.selectedDays}
         cal={props.cal}
         handleDateClick={props.handleDateClick}
         displayCal={props.displayCal}

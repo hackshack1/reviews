@@ -11,7 +11,7 @@ const createRecords = mockList => {
     .then(() => Listing.create(mockList))
     .then(() => Listing.findOne({ where: { location: mockList.location } }))
     .then(listing => {
-      const minStay = listing.minStayWeekdend;
+      const minStay = listing.minStayWeekend;
       const key = listing.id;
       const { maxGuest } = listing;
       return Reservation.sync().then(() => {
@@ -45,7 +45,7 @@ for (let k = 0; k < 3; k++) {
     taxes: 0.09,
     discount: Math.floor(Math.random() * 10) / 100,
     minStayWeekday: Math.floor(Math.random() * 4),
-    minStayWeekdend: Math.floor(Math.random() * 2),
+    minStayWeekend: Math.floor(Math.random() * 2),
     instantBooked: !!Math.round(Math.random()),
     maxGuest: Math.floor(Math.random() * 5) + 4
   };

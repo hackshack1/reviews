@@ -22,25 +22,6 @@ var generateNewReview = () => {
             value: 5,
         },
         reviews:dummyData
-        // reviews:[{
-        //     customer:{
-        //         customerID: 'C00001',
-        //         customerName: 'Howard',
-        //         customerPhoto: 'photo url',
-        //     },
-        //     ratings:{
-        //         communication: 4,
-        //         checkIn: 5,
-        //         location: 4,
-        //         accuracy: 5,
-        //         cleanliness: 4,
-        //         value: 5,
-        //     },
-        //     body: 'Great place to stay!',
-        //     bodyDate: new Date(),
-        //     response: 'Thanks for the review',
-        //     responseDate: new Date(),
-        // }]
     })
 }
 

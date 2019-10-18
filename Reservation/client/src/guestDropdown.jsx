@@ -11,6 +11,22 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  .clear {
+    align-self: flex-end;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+    margin: 0px 15px 5px 15px;
+    border: none;
+    outline: none;
+    color: #007e82;
+
+    :hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Option = styled.div`
@@ -26,12 +42,13 @@ const Option = styled.div`
   .info,
   .extraInfo {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
   }
 
   .extraInfo {
-    margin: 15px;
+    width: 80%;
+    margin: 0px 15px;
   }
 `;
 
@@ -194,6 +211,14 @@ const GuestDropdown = props => (
         Infants don’t count toward the number of guests.
       </div>
     </Option>
+    <button
+      className="clear"
+      onClick={() => {
+        props.handleDropdownClick(false);
+      }}
+    >
+      <span>Close</span>
+    </button>
   </Wrapper>
 );
 

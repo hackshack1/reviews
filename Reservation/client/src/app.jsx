@@ -46,6 +46,7 @@ const Price = styled.section`
 const Rate = styled.span`
   font-size: 20px;
   font-weight: 700;
+  margin-right: 2px;
 `;
 
 const ReserveButton = styled.button`

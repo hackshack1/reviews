@@ -14,7 +14,7 @@ const Cell = styled.td`
       : props.unavailable
       ? `text-decoration: line-through #dedede; 
       color: #dedede;`
-      : props.cal === 'checkIn'
+      : props.cal === 'checkIn' || (props.cal === 'checkOut' && !props.isHover)
       ? `:hover {
         background-color: #E4E7E7;
         cursor: pointer;

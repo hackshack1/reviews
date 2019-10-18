@@ -24,6 +24,11 @@ const Input = styled.input`
   display: inline-block;
   vertical-align: middle;
   font-size: 16px;
+  font-weight: 300;
+  color: ${props =>
+    props.checkIn === 'Check-in' || props.checkOut === 'Check-out'
+      ? '#707070'
+      : '#454545'};
   width: 100px;
   margin: 5px;
   padding: 5px;

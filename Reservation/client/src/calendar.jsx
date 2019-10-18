@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   position: absolute;
   width: 350px;
   margin: 10px;
+  padding: 10px 0px;
   text-align: center;
   display: grid;
   grid-template-rows: 20% 1fr 20%;
@@ -35,21 +36,23 @@ const Wrapper = styled.div`
     grid-row: 1;
     grid-column: 2;
     justify-self: center;
+    align-self: center;
     margin: 20px 0px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
   }
 `;
 
 const Button = styled.button`
   display: flex;
+  align-self: center;
   justify-content: center;
   align-items: center;
   grid-row: 1;
   grid-column: 2;
   padding: 0;
-  margin: 10px 0px;
-  height: 30px;
-  width: 35px;
+  height: 35px;
+  width: 40px;
   border-radius: 4px;
   border: 1px solid #dedede;
   text-align: center;
@@ -66,25 +69,25 @@ const RightButton = styled(Button)`
 const Table = styled.table`
   grid-row: 2;
   grid-column: 2;
-  margin: 15px 0;
+  margin: 10px 0;
   text-align: center;
   empty-cells: hide;
   border-collapse: separate;
   empty-cells: hide;
 
   th {
-    height: 20px
+    height: 20px;
     font-size: 12px;
   }
 
   td {
-    border: 0.5px solid #dedede;
-    height: 30px;
-    width: 35px;
+    border: 0.2px solid #dedede;
+    height: 40px;
+    width: 40px;
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 700;
   }
 `;
 

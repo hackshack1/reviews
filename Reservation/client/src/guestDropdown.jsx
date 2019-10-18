@@ -50,6 +50,22 @@ const ButtonWrapper = styled.span`
 
   .sign {
     font-size: 16px;
+    color: #02a699;
+  }
+
+  .minus {
+    border: 1px solid
+      ${props =>
+        props.adults === 1 || props.numChildren === 0 || props.infants === 0
+          ? '#D8F2F2'
+          : '#02a699'};
+
+    span {
+      color: ${props =>
+        props.adults === 1 || props.numChildren === 0 || props.infants === 0
+          ? '#D8F2F2'
+          : '#02a699'};
+    }
   }
 `;
 
@@ -57,8 +73,9 @@ const GuestDropdown = props => (
   <Wrapper className="guestDropdown">
     <Option>
       <label>Adults</label>
-      <ButtonWrapper>
+      <ButtonWrapper adults={props.adults}>
         <button
+          className="minus"
           onClick={() => {
             props.handleGuestClick('adults', 'minus');
           }}
@@ -80,8 +97,9 @@ const GuestDropdown = props => (
         <div>Children</div>
         <div className="info">Ages 2-12</div>
       </label>
-      <ButtonWrapper>
+      <ButtonWrapper numChildren={props.children}>
         <button
+          className="minus"
           onClick={() => {
             props.handleGuestClick('children', 'minus');
           }}
@@ -103,8 +121,9 @@ const GuestDropdown = props => (
         <div>Infants</div>
         <div className="info">Under 2</div>
       </label>
-      <ButtonWrapper>
+      <ButtonWrapper infants={props.infants}>
         <button
+          className="minus"
           onClick={() => {
             props.handleGuestClick('infants', 'minus');
           }}

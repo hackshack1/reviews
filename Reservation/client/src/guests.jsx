@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   padding: 5px;
 
-  label {
+  .field {
     display: block;
     margin: 2px;
     font-size: 12px;
@@ -59,7 +59,7 @@ const Guests = props => {
 
   return (
     <Wrapper ref={props.node}>
-      <label>Guests</label>
+      <label className="field">Guests</label>
       <Button
         onClick={() => {
           props.handleDropdownClick(true);

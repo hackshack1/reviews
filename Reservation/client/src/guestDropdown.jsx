@@ -53,98 +53,80 @@ const ButtonWrapper = styled.span`
   }
 `;
 
-const GuestDropdown = props => {
-  let node = React.createRef();
-
-  const handleClick = e => {
-    if (!node.current.contains(e.target)) {
-      props.handleDropdownClick(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClick, false);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClick, false);
-    };
-  });
-
-  return (
-    <Wrapper ref={node} className="guestDropdown">
-      <Option>
-        <label>Adults</label>
-        <ButtonWrapper>
-          <button
-            onClick={() => {
-              props.handleGuestClick('adults', 'minus');
-            }}
-          >
-            <span className="sign">-</span>
-          </button>
-          {props.adults}
-          <button
-            onClick={() => {
-              props.handleGuestClick('adults', 'plus');
-            }}
-          >
-            <span className="sign">+</span>
-          </button>
-        </ButtonWrapper>
-      </Option>
-      <Option>
-        <label>
-          <div>Children</div>
-          <div className="info">Ages 2-12</div>
-        </label>
-        <ButtonWrapper>
-          <button
-            onClick={() => {
-              props.handleGuestClick('children', 'minus');
-            }}
-          >
-            <span className="sign">-</span>
-          </button>
-          {props.children}
-          <button
-            onClick={() => {
-              props.handleGuestClick('children', 'plus');
-            }}
-          >
-            <span className="sign">+</span>
-          </button>
-        </ButtonWrapper>
-      </Option>
-      <Option>
-        <label>
-          <div>Infants</div>
-          <div className="info">Under 2</div>
-        </label>
-        <ButtonWrapper>
-          <button
-            onClick={() => {
-              props.handleGuestClick('infants', 'minus');
-            }}
-          >
-            <span className="sign">-</span>
-          </button>
-          {props.infants}
-          <button
-            onClick={() => {
-              props.handleGuestClick('infants', 'plus');
-            }}
-          >
-            <span className="sign">+</span>
-          </button>
-        </ButtonWrapper>
-      </Option>
-      <Option>
-        <div className="extraInfo">
-          Infants don’t count toward the number of guests.
-        </div>
-      </Option>
-    </Wrapper>
-  );
-};
+const GuestDropdown = props => (
+  <Wrapper className="guestDropdown">
+    <Option>
+      <label>Adults</label>
+      <ButtonWrapper>
+        <button
+          onClick={() => {
+            props.handleGuestClick('adults', 'minus');
+          }}
+        >
+          <span className="sign">-</span>
+        </button>
+        {props.adults}
+        <button
+          onClick={() => {
+            props.handleGuestClick('adults', 'plus');
+          }}
+        >
+          <span className="sign">+</span>
+        </button>
+      </ButtonWrapper>
+    </Option>
+    <Option>
+      <label>
+        <div>Children</div>
+        <div className="info">Ages 2-12</div>
+      </label>
+      <ButtonWrapper>
+        <button
+          onClick={() => {
+            props.handleGuestClick('children', 'minus');
+          }}
+        >
+          <span className="sign">-</span>
+        </button>
+        {props.children}
+        <button
+          onClick={() => {
+            props.handleGuestClick('children', 'plus');
+          }}
+        >
+          <span className="sign">+</span>
+        </button>
+      </ButtonWrapper>
+    </Option>
+    <Option>
+      <label>
+        <div>Infants</div>
+        <div className="info">Under 2</div>
+      </label>
+      <ButtonWrapper>
+        <button
+          onClick={() => {
+            props.handleGuestClick('infants', 'minus');
+          }}
+        >
+          <span className="sign">-</span>
+        </button>
+        {props.infants}
+        <button
+          onClick={() => {
+            props.handleGuestClick('infants', 'plus');
+          }}
+        >
+          <span className="sign">+</span>
+        </button>
+      </ButtonWrapper>
+    </Option>
+    <Option>
+      <div className="extraInfo">
+        Infants don’t count toward the number of guests.
+      </div>
+    </Option>
+  </Wrapper>
+);
 
 export default GuestDropdown;

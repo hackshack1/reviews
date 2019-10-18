@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GuestDropdown from './guestDropdown';
 import styled from 'styled-components';
 
@@ -45,6 +45,8 @@ const Button = styled.button`
 `;
 
 const Guests = props => {
+  const node = React.createRef();
+
   const guestAmt =
     props.guestAmt > 1
       ? ` ${props.guestAmt} guests`
@@ -57,12 +59,26 @@ const Guests = props => {
       ? `, ${props.infants} infants `
       : null;
 
+  const handleClick = e => {
+    if (!node.current.contains(e.target)) {
+      props.handleDropdownClick(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick, false);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick, false);
+    };
+  });
+
   return (
-    <Wrapper ref={props.node}>
+    <Wrapper ref={node}>
       <label className="field">Guests</label>
       <Button
         onClick={() => {
-          props.handleDropdownClick(true);
+          props.handleDropdownClick(!props.displayDropdown);
         }}
       >
         <span>

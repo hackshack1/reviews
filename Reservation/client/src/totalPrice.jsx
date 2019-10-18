@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
   .total {
     border: none;
-    font-weight: 500;
+    font-weight: 700;
   }
 `;
 

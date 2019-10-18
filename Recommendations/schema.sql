@@ -3,9 +3,9 @@ CREATE DATABASE recommendations;
 
 USE recommendations;
 
--- CREATE TABLE pictures (id int NOT NULL auto_increment,
---   url varchar(500),
---   primary key (id));
+CREATE TABLE pictures (id int NOT NULL auto_increment,
+  url varchar(500),
+  primary key (id));
 
 -- CREATE TABLE cities (
 --   id int NOT NULL auto_increment, 

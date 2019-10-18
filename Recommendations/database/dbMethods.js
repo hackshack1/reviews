@@ -6,7 +6,7 @@ const db = require('./index.js')
   
 
 const getAllFromHomes = (cb) => {
-  const queryString = `SELECT * FROM listings;`   
+  const queryString = `SELECT * FROM listings where cityName="Boston";`   
   db.query(queryString, (err, dbResObj) => {
     if (err) {
       cb(err);

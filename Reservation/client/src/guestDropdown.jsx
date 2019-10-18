@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   border: 1px solid #dedede;
   background: white;
   z-index: 1;
-  width: 358px;
+  width: 348px;
   height: 300px;
   position: absolute;
   display: flex;
@@ -17,19 +17,21 @@ const Option = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 600;
   label {
     display: inline-block;
     margin: 0px 15px;
   }
 
-  .info {
-    margin: 10px 0px;
-    font-size: 12px;
+  .info,
+  .extraInfo {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 300;
   }
 
   .extraInfo {
     margin: 15px;
-    font-size: 12px;
   }
 `;
 

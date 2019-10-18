@@ -3,13 +3,13 @@ import GuestDropdown from './guestDropdown';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 5px;
+  padding: 5px 0px;
 
   .field {
+    margin-bottom: 3px;
     display: block;
-    margin: 2px;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
   }
 `;
 
@@ -24,14 +24,15 @@ const Button = styled.button`
   align-items: center;
 
   span {
+    color: #454545;
     font-size: 16px;
+    font-weight: 300;
     display: inline-block;
-    padding: 5px;
-    margin: 5px;
+    margin: 10px;
   }
 
   svg {
-    margin: 10px;
+    margin-right: 15px;
   }
 
   :focus {

@@ -3,13 +3,13 @@ import Calendar from './calendar';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 5px;
+  padding: 5px 0px;
 `;
 const Label = styled.label`
   display: block;
-  margin: 2px;
+  margin-bottom: 3px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const InputWrapper = styled.div`
@@ -29,16 +29,12 @@ const Input = styled.input`
   padding: 5px;
   border: none;
   ${props =>
-    props.cal === 'checkOut'
+    (props.cal === 'checkOut' && props.checkOut) ||
+    (props.cal === 'checkIn' && props.checkIn)
       ? `background-color: #a0f2ea;
   outline: none;
   border-radius: 3px;`
       : null}
-  :focus {
-    background-color: #a0f2ea;
-    outline: none;
-    border-radius: 3px;
-  }
 `;
 
 const Dates = props => (
@@ -46,6 +42,8 @@ const Dates = props => (
     <Label>Dates</Label>
     <InputWrapper>
       <Input
+        cal={props.cal}
+        checkIn={props.checkIn}
         onClick={() => {
           props.displayCal('checkIn');
         }}
@@ -85,6 +83,7 @@ const Dates = props => (
       </svg>
       <Input
         cal={props.cal}
+        checkOut={props.checkOut}
         onClick={() => {
           props.displayCal('checkOut');
         }}

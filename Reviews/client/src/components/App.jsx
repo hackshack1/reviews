@@ -2,23 +2,36 @@ import React from 'react';
 import Axios from 'Axios';
 import Reviews from './Reviews.jsx';
 import styled from 'styled-components';
+import Rating from './Rating.jsx'
+import RatingsBars from './RatingsBars.jsx'
+import SearchBar from './SearchBar.jsx'
 
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+
+`;
+const SpecsContainer = styled.div`
+  max-width: 525px;
+  box-sizing: border-box;
+
 `;
 
 const Head = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 500;
   line-height: 1.25em;
   color: #484848;
   padding-top: 2px;
   padding-bottom: 2px;
+`;
+const RatingSearchBarContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 class App extends React.Component {
@@ -36,7 +49,7 @@ componentDidMount(){
 getData(){
   Axios.get('/reviews')
     .then((res)=>{
-      console.log(res.data[0])
+      // console.log(res.data[0])
       this.setState({reviews:res.data[0].reviews})
     })
     .catch((err)=>{
@@ -46,11 +59,22 @@ getData(){
 
 
   render() {
-
     return (
       <Wrapper>
-        <Head>Reviews</Head>
-        <Reviews reviews={this.state.reviews}/>
+        <div>
+          <SpecsContainer>
+            <Head>Reviews</Head>
+            <br></br>
+            <RatingSearchBarContainer>
+              <Rating reviews={this.state.reviews}/>
+              <SearchBar/>
+            </RatingSearchBarContainer>
+            <br></br>
+            <RatingsBars/>
+          </SpecsContainer>
+          <br></br>
+          <Reviews reviews={this.state.reviews}/>
+        </div>
       </Wrapper>
     )
   }

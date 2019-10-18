@@ -3,7 +3,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 const ReviewBox = styled.div`
-    padding: 30px;
+    padding-bottom: 30px;
     box-sizing: border-box;
     color: rgb(72, 72, 72);
     display: block;

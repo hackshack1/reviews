@@ -191,6 +191,7 @@ export default class App extends React.Component {
           adults={this.state.adults}
           children={this.state.children}
           infants={this.state.infants}
+          maxGuest={this.state.maxGuest}
         />
         {this.state.displayTotal ? (
           <TotalPrice

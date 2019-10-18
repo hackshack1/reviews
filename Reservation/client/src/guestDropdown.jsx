@@ -54,15 +54,32 @@ const ButtonWrapper = styled.span`
   }
 
   .minus {
-    border: 1px solid
-      ${props =>
-        props.adults === 1 || props.numChildren === 0 || props.infants === 0
-          ? '#D8F2F2'
-          : '#02a699'};
+    border-color: ${props =>
+      (props.adult && props.adults === 1) ||
+      (props.child && props.numChildren === 0) ||
+      props.infants === 0
+        ? '#D8F2F2'
+        : '#02a699'};
 
     span {
       color: ${props =>
-        props.adults === 1 || props.numChildren === 0 || props.infants === 0
+        (props.adult && props.adults === 1) ||
+        (props.child && props.numChildren === 0) ||
+        props.infants === 0
+          ? '#D8F2F2'
+          : '#02a699'};
+    }
+  }
+
+  .plus {
+    border-color: ${props =>
+      props.adults + props.numChildren === props.maxGuest
+        ? '#D8F2F2'
+        : '#02a699'};
+
+    span {
+      color: ${props =>
+        props.adults + props.numChildren === props.maxGuest
           ? '#D8F2F2'
           : '#02a699'};
     }
@@ -73,7 +90,12 @@ const GuestDropdown = props => (
   <Wrapper className="guestDropdown">
     <Option>
       <label>Adults</label>
-      <ButtonWrapper adults={props.adults}>
+      <ButtonWrapper
+        adult
+        adults={props.adults}
+        numChildren={props.children}
+        maxGuest={props.maxGuest}
+      >
         <button
           className="minus"
           onClick={() => {
@@ -84,6 +106,7 @@ const GuestDropdown = props => (
         </button>
         {props.adults}
         <button
+          className="plus"
           onClick={() => {
             props.handleGuestClick('adults', 'plus');
           }}
@@ -97,7 +120,12 @@ const GuestDropdown = props => (
         <div>Children</div>
         <div className="info">Ages 2-12</div>
       </label>
-      <ButtonWrapper numChildren={props.children}>
+      <ButtonWrapper
+        child
+        adults={props.adults}
+        numChildren={props.children}
+        maxGuest={props.maxGuest}
+      >
         <button
           className="minus"
           onClick={() => {
@@ -108,6 +136,7 @@ const GuestDropdown = props => (
         </button>
         {props.children}
         <button
+          className="plus"
           onClick={() => {
             props.handleGuestClick('children', 'plus');
           }}
@@ -121,7 +150,7 @@ const GuestDropdown = props => (
         <div>Infants</div>
         <div className="info">Under 2</div>
       </label>
-      <ButtonWrapper infants={props.infants}>
+      <ButtonWrapper infants={props.infants} maxGuest={props.maxGuest}>
         <button
           className="minus"
           onClick={() => {
@@ -132,6 +161,7 @@ const GuestDropdown = props => (
         </button>
         {props.infants}
         <button
+          className="plus"
           onClick={() => {
             props.handleGuestClick('infants', 'plus');
           }}
@@ -142,6 +172,7 @@ const GuestDropdown = props => (
     </Option>
     <Option>
       <div className="extraInfo">
+        {props.maxGuest > 0 ? `${props.maxGuest} guests maximum. ` : null}
         Infants don’t count toward the number of guests.
       </div>
     </Option>

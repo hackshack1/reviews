@@ -60,8 +60,10 @@ const Guests = props => {
       : null;
 
   const handleClick = e => {
-    if (!node.current.contains(e.target)) {
-      props.handleDropdownClick(false);
+    if (node.current) {
+      if (!node.current.contains(e.target)) {
+        props.handleDropdownClick(false);
+      }
     }
   };
 
@@ -135,6 +137,7 @@ const Guests = props => {
           adults={props.adults}
           children={props.children}
           infants={props.infants}
+          maxGuest={props.maxGuest}
         />
       ) : null}
     </Wrapper>

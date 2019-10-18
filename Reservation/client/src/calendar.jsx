@@ -41,6 +41,25 @@ const Wrapper = styled.div`
     font-size: 18px;
     font-weight: 700;
   }
+
+  .clear {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    grid-row: 3;
+    grid-column: 2;
+    margin: 20px 0;
+    align-self: start;
+    justify-self: end;
+    border: none;
+    outline: none;
+    color: #007e82;
+
+    :hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -110,6 +129,7 @@ class Calendar extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleDaysHover = this.handleDaysHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.checkUnavailable = this.checkUnavailable.bind(this);
   }
 
   componentDidMount() {
@@ -370,6 +390,15 @@ class Calendar extends React.Component {
           </thead>
           <tbody>{this.createDays(this.state.month)}</tbody>
         </Table>
+        {this.props.checkIn !== 'Check-in' ||
+        this.props.checkOut !== 'Check-out' ? (
+          <button
+            className="clear"
+            onClick={() => this.props.handleClearClick(this.checkUnavailable)}
+          >
+            <span>Clear Dates</span>
+          </button>
+        ) : null}
       </Wrapper>
     );
   }

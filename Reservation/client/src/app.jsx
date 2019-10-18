@@ -90,6 +90,7 @@ export default class App extends React.Component {
 
     this.displayCal = this.displayCal.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleGuestClick = this.handleGuestClick.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
@@ -166,6 +167,19 @@ export default class App extends React.Component {
     }
   }
 
+  handleClearClick(callback) {
+    const checkOut = 'Check-out';
+    const checkIn = 'Check-in';
+    const selectedDays = [];
+    const nights = 0;
+    const displayTotal = false;
+
+    this.setState(
+      { checkOut, checkIn, selectedDays, nights, displayTotal },
+      callback
+    );
+  }
+
   checkMinStay() {
     let { checkIn, checkOut, minStayWeekday, minStayWeekend } = this.state;
     const defaultText = (
@@ -219,6 +233,7 @@ export default class App extends React.Component {
           displayCal={this.displayCal}
           cal={this.state.cal}
           handleDateClick={this.handleDateClick}
+          handleClearClick={this.handleClearClick}
           minStayWeekday={this.state.minStayWeekday}
           minStayWeekdend={this.state.minStayWeekdend}
         />

@@ -42,6 +42,10 @@ const Button = styled.button`
       border-radius: 3px;
     }
   }
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Guests = props => {

@@ -61,6 +61,15 @@ const ButtonWrapper = styled.span`
         ? '#D8F2F2'
         : '#02a699'};
 
+    :hover {
+      cursor: ${props =>
+        (props.adult && props.adults === 1) ||
+        (props.child && props.numChildren === 0) ||
+        props.infants === 0
+          ? 'default'
+          : 'pointer'};
+    }
+
     span {
       color: ${props =>
         (props.adult && props.adults === 1) ||
@@ -76,6 +85,13 @@ const ButtonWrapper = styled.span`
       props.adults + props.numChildren === props.maxGuest
         ? '#D8F2F2'
         : '#02a699'};
+
+    :hover {
+      cursor: ${props =>
+        props.adults + props.numChildren === props.maxGuest
+          ? 'default'
+          : 'pointer'};
+    }
 
     span {
       color: ${props =>

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   background: white;
   z-index: 1;
   position: absolute;
-  width: 270px;
+  width: 350px;
   margin: 10px;
   text-align: center;
   display: grid;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     border-bottom: 0px solid #dedede;
     border-left: 1px solid #dedede;
     bottom: 100%;
-    left: ${props => (props.cal === 'checkIn' ? '10%' : '60%')}
+    left: ${props => (props.cal === 'checkIn' ? '10%' : '60%')};
     content: '';
     transform: rotate(45deg);
     margin-bottom: -5px;
@@ -35,17 +35,21 @@ const Wrapper = styled.div`
     grid-row: 1;
     grid-column: 2;
     justify-self: center;
-    margin: 20px 0px; 
+    margin: 20px 0px;
     font-weight: 600;
   }
 `;
 
 const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-row: 1;
   grid-column: 2;
+  padding: 0;
   margin: 10px 0px;
   height: 30px;
-  width: 30px;
+  width: 35px;
   border-radius: 4px;
   border: 1px solid #dedede;
   text-align: center;
@@ -65,7 +69,6 @@ const Table = styled.table`
   margin: 15px 0;
   text-align: center;
   empty-cells: hide;
-  width: auto;
   border-collapse: separate;
   empty-cells: hide;
 
@@ -77,7 +80,7 @@ const Table = styled.table`
   td {
     border: 0.5px solid #dedede;
     height: 30px;
-    width: 30px;
+    width: 35px;
     text-align: center;
     vertical-align: middle;
     font-size: 12px;
@@ -94,19 +97,53 @@ class Calendar extends React.Component {
         this.props.checkIn !== 'Check-in'
           ? moment(this.props.checkIn)
           : moment(),
-      weekdays: moment.weekdaysMin()
+      weekdays: moment.weekdaysMin(),
+      today: moment().format('MMMM-YYYY-DD'),
+      unavailableDays: [],
+      hoverDays: [],
+      selectedDays: []
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleMonthClick = this.handleMonthClick.bind(this);
+    this.handleDaysHover = this.handleDaysHover.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
+    this.checkUnavailable();
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  checkUnavailable() {
+    let unavailableDays = [];
+    this.props.reservations.forEach(rsvp => {
+      for (let k = 0; k < rsvp.totalNights; k++) {
+        let day = moment(rsvp.checkIn, 'YYYY-MM-DD')
+          .add(k, 'days')
+          .format('MM/DD/YYYY');
+        unavailableDays.push(day);
+      }
+    });
+    if (this.props.cal === 'checkOut') {
+      const selected = moment(this.props.checkIn).day();
+      let minDays =
+        selected >= 1 && selected <= 5
+          ? this.props.minStayWeekday
+          : this.props.minStayWeekend;
+      if (minDays > 1) {
+        for (var k = 1; k < minDays; k++) {
+          let day = moment(this.props.checkIn)
+            .add(k, 'days')
+            .format('MM/DD/YYYY');
+          unavailableDays.push(day);
+        }
+      }
+    }
+    this.setState({ unavailableDays });
   }
 
   handleClick(e) {
@@ -125,6 +162,51 @@ class Calendar extends React.Component {
     this.setState({ month });
   }
 
+  handleDaysHover(month, day, cal) {
+    if (
+      this.props.checkIn !== 'Check-in' &&
+      this.props.checkOut === 'Check-out'
+    ) {
+      const hovered = moment(`${month} ${day}`, 'MMMM-YYYY-DD');
+      const checkIn = moment(this.props.checkIn);
+      let hoverDays = [];
+
+      if (hovered.isSame(checkIn, 'day')) {
+        let minDays =
+          checkIn.day() >= 1 && checkIn.day() <= 5
+            ? this.props.minStayWeekday
+            : this.props.minStayWeekend;
+
+        if (minDays > 1) {
+          for (let k = 1; k <= minDays; k++) {
+            let day = checkIn
+              .clone()
+              .add(k, 'days')
+              .format('MM/DD/YYYY');
+            hoverDays.push(day);
+          }
+        }
+      } else if (cal === 'checkOut') {
+        if (hovered.isAfter(checkIn)) {
+          const diff = hovered.diff(checkIn, 'days');
+          for (let k = 1; k <= diff; k++) {
+            let day = checkIn
+              .clone()
+              .add(k, 'days')
+              .format('MM/DD/YYYY');
+            hoverDays.push(day);
+          }
+        }
+      }
+      this.setState({ hoverDays });
+    }
+  }
+
+  handleMouseLeave() {
+    const hoverDays = [];
+    this.setState({ hoverDays });
+  }
+
   createDays(month) {
     const firstDay = month.startOf('month').format('d');
     const lastDate = month.endOf('month').format('D');
@@ -136,14 +218,51 @@ class Calendar extends React.Component {
     for (let k = 0; k < firstDay; k++) {
       days.push(<Day key={`b${k}`} day="" />);
     }
+
     for (let k = 1; k <= lastDate; k++) {
+      let day = moment(`${month.format('MMMM YYYY')} ${k}`, 'MMMM-YYYY-DD');
+      let isCheckIn =
+        this.props.checkIn !== 'Check-in'
+          ? day.isSame(this.props.checkIn)
+          : false;
+
+      let hasDay = this.state.unavailableDays.includes(
+        day.format('MM/DD/YYYY')
+      );
+      let isHover = this.state.hoverDays.includes(day.format('MM/DD/YYYY'));
+      let isSelected = this.props.selectedDays.includes(
+        day.format('MM/DD/YYYY')
+      );
+      let unavailable =
+        day.isBefore(this.state.today) ||
+        day.isSame(this.state.today) ||
+        hasDay;
+
+      if (this.props.checkIn !== 'Check-in' && this.props.cal === 'checkOut') {
+        const nextRSVPs = this.props.reservations.filter(rsvp =>
+          moment(rsvp.checkIn, 'YYYY-MM-DD').isAfter(moment(this.props.checkIn))
+        );
+        const rsvpdate = nextRSVPs[0] ? nextRSVPs[0].checkIn : null;
+        const hasRSVPd = rsvpdate ? day.isAfter(rsvpdate) : false;
+
+        unavailable = day.isBefore(this.props.checkIn) || hasRSVPd || hasDay;
+      }
+
       days.push(
         <Day
+          isCheckIn={isCheckIn}
+          isHover={isHover}
+          isSelected={isSelected}
           cal={this.props.cal}
           handleDateClick={this.props.handleDateClick}
+          checkSelected={this.checkSelected}
+          handleDaysHover={this.handleDaysHover}
+          handleCheckOutHover={this.handleCheckOutHover}
+          handleMouseLeave={this.handleMouseLeave}
           key={k}
           month={month.format('MMMM YYYY')}
           day={k}
+          unavailable={unavailable}
         />
       );
     }
@@ -169,7 +288,37 @@ class Calendar extends React.Component {
             this.handleMonthClick('left');
           }}
         >
-          left
+          {' '}
+          <svg width="20px" height="20px">
+            <line
+              x1="0"
+              x2="20"
+              y1="10"
+              y2="10"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            />
+            <line />
+            <line
+              x1="0"
+              x2="5"
+              y1="10"
+              y2="15"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            ></line>
+            <line
+              x1="0"
+              x2="5"
+              y1="10"
+              y2="5"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            ></line>
+          </svg>
         </LeftButton>
         <h2>{this.state.month.format('MMMM YYYY')}</h2>
         <RightButton
@@ -177,7 +326,36 @@ class Calendar extends React.Component {
             this.handleMonthClick('right');
           }}
         >
-          right
+          <svg width="20px" height="20px">
+            <line
+              x1="0"
+              x2="20"
+              y1="10"
+              y2="10"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            />
+            <line />
+            <line
+              x1="20"
+              x2="15"
+              y1="10"
+              y2="15"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            ></line>
+            <line
+              x1="20"
+              x2="15"
+              y1="10"
+              y2="5"
+              stroke="black"
+              strokeWidth=".70"
+              strokeLinecap="butt"
+            ></line>
+          </svg>
         </RightButton>
         <Table>
           <thead>

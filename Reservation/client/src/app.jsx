@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 0;
   display: grid;
-  width: 300px;
+  width: 370px;
   float: right;
   padding: 15px;
-  margin: 5px;
+  margin: 20px 30px;
   grid-gap: 15px;
 `;
 
@@ -48,6 +48,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      selectedDays: [],
       reservations: [],
       basePrice: 0,
       newPrice: 0,
@@ -92,14 +93,26 @@ export default class App extends React.Component {
     const selected = moment(`${month} ${date}`, 'MMMM-YYYY-DD').format(
       'MM/DD/YYYY'
     );
+    let selectedDays = [];
 
     if (cal === 'checkIn') {
       const checkIn = selected;
+      const checkOut = 'Check-out';
+      selectedDays.unshift(selected);
       const cal = 'checkOut';
-      this.setState({ checkIn, cal });
+      this.setState({ checkIn, checkOut, cal, selectedDays });
     } else {
       const checkOut = selected;
-      this.setState({ checkOut }, this.calculatePrice);
+      const cal = '';
+      let diff = moment(checkOut).diff(this.state.checkIn, 'days');
+      selectedDays.push(this.state.checkIn);
+      for (let k = 1; k <= diff; k++) {
+        let day = moment(this.state.checkIn)
+          .add(k, 'days')
+          .format('MM/DD/YYYY');
+        selectedDays.push(day);
+      }
+      this.setState({ checkOut, cal, selectedDays }, this.calculatePrice);
     }
   }
 
@@ -158,11 +171,15 @@ export default class App extends React.Component {
           per night
         </Price>
         <Dates
+          reservations={this.state.reservations}
           checkIn={this.state.checkIn}
           checkOut={this.state.checkOut}
+          selectedDays={this.state.selectedDays}
           displayCal={this.displayCal}
           cal={this.state.cal}
           handleDateClick={this.handleDateClick}
+          minStayWeekday={this.state.minStayWeekday}
+          minStayWeekdend={this.state.minStayWeekdend}
         />
         <Guests
           guestAmt={this.state.guestAmt}

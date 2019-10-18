@@ -37,7 +37,7 @@ const Listing = db.define('listing', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  minStayWeekdend: {
+  minStayWeekend: {
     type: Sequelize.INTEGER,
     allowNull: false
   },

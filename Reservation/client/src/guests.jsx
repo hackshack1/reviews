@@ -28,7 +28,8 @@ const Button = styled.button`
     font-size: 16px;
     font-weight: 300;
     display: inline-block;
-    margin: 10px;
+    padding: 5px;
+    margin: 5px;
   }
 
   svg {

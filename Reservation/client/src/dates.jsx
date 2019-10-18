@@ -23,9 +23,10 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   display: inline-block;
   vertical-align: middle;
+  font-size: 16px;
   width: 100px;
   margin: 5px;
-  padding: 3px;
+  padding: 5px;
   border: none;
   ${props =>
     props.cal === 'checkOut'

@@ -11,59 +11,107 @@ const Wrapper = styled.div`
     font-size: 12px;
     font-weight: 500;
   }
+`;
 
-  .guests {
-    border: 1px solid #dedede;
-    padding: 8px;
-    width: 100%;
-    text-align: left;
+const Button = styled.button`
+  border: 1px solid #dedede;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-    :after {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-top: 1px solid black;
-      border-right: 0px solid #dedede;
-      border-bottom: 0px solid #dedede;
-      border-left: 1px solid black;
-      left: 80%
-      content: '';
-      transform: rotate(45deg);
-      margin-top: 5px;
-      background: white;
-    }
+  span {
+    font-size: 16px;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+  }
 
-    :select:after {
-      border-top: 0px solid black;
-      border-right: 1px solid #dedede;
-      border-bottom: 1px solid #dedede;
-      border-left: 0px solid black;
+  svg {
+    margin: 10px;
+  }
+
+  :focus {
+    border: 1px solid #02a699;
+    span {
+      background-color: #a0f2ea;
+      outline: none;
+      border-radius: 3px;
     }
   }
 `;
 
 const Guests = props => {
   const guestAmt =
-    props.guestAmt > 1 ? `${props.guestAmt} guests` : `${props.guestAmt} guest`;
+    props.guestAmt > 1
+      ? ` ${props.guestAmt} guests`
+      : ` ${props.guestAmt} guest`;
 
   const infantAmt =
     props.infants === 1
-      ? `, ${props.infants} infant`
+      ? `, ${props.infants} infant `
       : props.infants > 1
-      ? `, ${props.infants} infants`
+      ? `, ${props.infants} infants `
       : null;
 
   return (
     <Wrapper ref={props.node}>
       <label>Guests</label>
-      <button
-        className="guests"
+      <Button
         onClick={() => {
           props.handleDropdownClick(true);
         }}
       >
-        {guestAmt} {infantAmt}
-      </button>
+        <span>
+          {guestAmt} {infantAmt}
+        </span>
+        {props.displayDropdown ? (
+          <svg width="16px" height="16px">
+            <line
+              x1="0"
+              x2="8"
+              y1="8"
+              y2="0"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeLinecap="butt"
+            ></line>
+            <line
+              x1="15"
+              x2="8"
+              y1="8"
+              y2="0"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeLinecap="butt"
+            ></line>
+          </svg>
+        ) : (
+          <svg width="16px" height="16px">
+            <line
+              x1="0"
+              x2="8"
+              y1="8"
+              y2="15"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeLinecap="butt"
+            ></line>
+            <line
+              x1="15"
+              x2="8"
+              y1="8"
+              y2="15"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeLinecap="butt"
+            ></line>
+          </svg>
+        )}
+      </Button>
       {props.displayDropdown ? (
         <GuestDropdown
           handleDropdownClick={props.handleDropdownClick}

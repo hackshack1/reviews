@@ -7,12 +7,14 @@ import Guests from './guests';
 import TotalPrice from './totalPrice';
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
   border: 1px solid #dedede;
   font-family: 'Montserrat', sans-serif;
   position: relative;
   z-index: 0;
   display: grid;
-  width: 370px;
+  grid-template-columns: 100%;
+  width: 400px;
   float: right;
   padding: 15px;
   margin: 20px 30px;

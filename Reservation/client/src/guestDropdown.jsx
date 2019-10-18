@@ -1,4 +1,15 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  border: 1px solid #dedede;
+  background: white;
+  z-index: 1;
+  width: 358px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+`;
 
 const GuestDropdown = props => {
   let node = React.createRef();
@@ -18,7 +29,7 @@ const GuestDropdown = props => {
   });
 
   return (
-    <div ref={node} className="guestDropdown">
+    <Wrapper ref={node} className="guestDropdown">
       <label>
         Adults
         <button
@@ -73,7 +84,7 @@ const GuestDropdown = props => {
           plus
         </button>
       </label>
-    </div>
+    </Wrapper>
   );
 };
 

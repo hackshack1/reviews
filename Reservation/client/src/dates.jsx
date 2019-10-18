@@ -29,7 +29,7 @@ const Input = styled.input`
     props.checkIn === 'Check-in' || props.checkOut === 'Check-out'
       ? '#707070'
       : '#454545'};
-  width: 100px;
+  width: 135px;
   margin: 5px;
   padding: 5px;
   border: none;

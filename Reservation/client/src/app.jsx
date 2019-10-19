@@ -225,7 +225,14 @@ export default class App extends React.Component {
 
   handleReserveClick(boo) {
     const displayConfirmation = boo;
-    this.setState({ displayConfirmation });
+    if (
+      this.state.checkOut !== 'Check-out' &&
+      this.state.checkIn !== 'Check-in'
+    ) {
+      this.setState({ displayConfirmation });
+    } else {
+      this.setState({ cal: 'checkIn' });
+    }
   }
 
   render() {

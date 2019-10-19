@@ -179,9 +179,10 @@ export default class App extends React.Component {
     const selectedDays = [];
     const nights = 0;
     const displayTotal = false;
+    const cal = 'checkIn';
 
     this.setState(
-      { checkOut, checkIn, selectedDays, nights, displayTotal },
+      { checkOut, checkIn, selectedDays, nights, displayTotal, cal },
       callback
     );
   }

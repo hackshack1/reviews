@@ -8,6 +8,9 @@ const MainWrapper = styled.div`
   text-align: center;
   border: 1px solid yellow;
   height: 420px;
+  // display: flex;
+  // flex-direction: row;
+  // flex:1;
 `;
 const PrevDiv = styled.div`
   position: absolute;
@@ -19,7 +22,7 @@ const PrevButton = styled.button`
   position: absolute;
 `;
 const Container = styled.div`
-  width: 900px;
+  width: 920px;
   height:420px;
   border: 1px dashed grey;
   display: inline-block;
@@ -56,9 +59,10 @@ const NextButton = styled.button`
 //   z-index: 2;
 // `;
 
-const Title = styled.h5`
+const Title = styled.h2`
   text-align: left;
-  padding-left: 200px;
+  padding-left:7.5px;
+
 `;
 class HomesRecommendation extends React.Component {
   constructor (props) {
@@ -106,9 +110,9 @@ class HomesRecommendation extends React.Component {
   render() {
     return (
       <MainWrapper>
-          <PrevDiv className="innerdiv">
-            <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}>PREVIOUS</PrevButton>
-          </PrevDiv>
+        <PrevDiv className="innerdiv">
+          <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}>PREVIOUS</PrevButton>
+        </PrevDiv>
         <Container>
           <Title>More homes you may like</Title>
           <ListingsDiv>

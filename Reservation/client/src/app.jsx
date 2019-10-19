@@ -122,8 +122,10 @@ export default class App extends React.Component {
       const checkIn = selected;
       const checkOut = 'Check-out';
       selectedDays.unshift(selected);
-      const cal = 'checkOut';
-      this.setState({ checkIn, checkOut, cal, selectedDays });
+      this.setState(
+        { checkIn, checkOut, selectedDays },
+        this.displayCal('checkOut')
+      );
     } else {
       const checkOut = selected;
       const cal = '';

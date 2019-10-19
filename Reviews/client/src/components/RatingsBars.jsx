@@ -39,6 +39,7 @@ const RatingsBarStyle = styled.div`
     align-self: center;
     height: 3px;
     width: 80px;
+    border-radius: 60px;
     // border: 1px solid #333;
     background-color: var(--color-accent-light-gray, #D8D8D8) !important;
   `;
@@ -60,7 +61,7 @@ const BarFiller = styled.div`
       super(props)
 
       this.state = {
-        percentage: 80
+        percentage:75
       }
     }
 
@@ -73,24 +74,24 @@ const BarFiller = styled.div`
                 <RatingContainer>
                     <div>Accuracy</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.accAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.accAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
 
                 <RatingContainer>
                     <div>Value</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.valueAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.valueAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
 
                 <RatingContainer>
                     <div>Location</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.locAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.locAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
             </RatingBarBoxLeft>
@@ -99,24 +100,24 @@ const BarFiller = styled.div`
                 <RatingContainer>
                     <div>Cleanliness</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.cleanAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.cleanAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
 
                 <RatingContainer>
                     <div>Communication</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.commsAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.commsAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
 
                 <RatingContainer>
                     <div>Check-in</div>
                     <RatingLineScore>
-                        <RatingsBarStyle><BarFiller style={{ width: `${this.state.percentage}%` }}></BarFiller></RatingsBarStyle>
-                        <Score>4.0</Score>
+                        <RatingsBarStyle><BarFiller style={{ width: `${this.props.reviews.checkAvg/5*100}%` }}></BarFiller></RatingsBarStyle>
+                        <Score>{this.props.reviews.checkAvg.toFixed(1)}</Score>
                     </RatingLineScore>
                 </RatingContainer>
             </RatingBarBoxRight>

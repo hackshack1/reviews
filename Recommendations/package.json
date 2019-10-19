@@ -41,7 +41,9 @@
     "path": "^0.12.7",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "request": "^2.88.0",
     "sequelize": "^5.19.5",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "xml2js": "^0.4.22"
   }
 }

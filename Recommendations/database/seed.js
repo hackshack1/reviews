@@ -33,36 +33,39 @@ const homeGenerator = () => {
 
 homeGenerator();
 
-// const picGenerator = () => {
-//   for (var i = 0; i < 100; i++) {
-  
-//     db.query(`insert into pictures (url) values("${faker.image.imageUrl(500,500,"room")}");`,  (err, results) => { 
-//     if (err) {
-//         console.log(err, "could not add to pictures table")
-//       } else {
-//         console.log('pic added')
-//       }
-//     });
-//   }
-// };
-
-// picGenerator();
+var urlportion = "https://air6n6pictures.s3-us-west-1.amazonaws.com/"
 
 
-
-const userGenerator = () => {
+const picGenerator = () => {
   for (var i = 0; i < 100; i++) {
-    db.query(`insert into users (userName) values("${faker.internet.userName()}");`, (err, results) => { 
+  
+    db.query(`insert into pictures (url) values();`,  (err, results) => { 
     if (err) {
-        console.log(err, "could not add to users table")
+        console.log(err, "could not add to pictures table")
       } else {
-        console.log('username added')
+        console.log('pic added')
       }
     });
   }
 };
 
-userGenerator();
+picGenerator();
+
+
+
+// const userGenerator = () => {
+//   for (var i = 0; i < 100; i++) {
+//     db.query(`insert into users (userName) values("${faker.internet.userName()}");`, (err, results) => { 
+//     if (err) {
+//         console.log(err, "could not add to users table")
+//       } else {
+//         console.log('username added')
+//       }
+//     });
+//   }
+// };
+
+// userGenerator();
 
 // const cityGenerator = () => {
 //   for (var i = 0; i < 10; i++) { 
@@ -76,3 +79,4 @@ userGenerator();
 
 
 
+//pool connection

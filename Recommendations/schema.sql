@@ -19,10 +19,10 @@ CREATE TABLE pictures (id int NOT NULL auto_increment,
 -- CREATE TABLE pictures_homes
 
 
-CREATE TABLE users (
-  id int NOT NULL auto_increment, 
-  userName varchar(100),
-    primary key (id));
+-- CREATE TABLE users (
+--   id int NOT NULL auto_increment, 
+--   userName varchar(100),
+--     primary key (id));
 
 CREATE TABLE listings (
   id int NOT NULL auto_increment,

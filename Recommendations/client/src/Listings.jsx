@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   position: absolute;
   transition: transform 300ms;
-  border:0.2px dashed green;
+  // border:0.2px dashed green;
 `
 // cubic-bezier(0.455, 0.03, 0.515, 0.955);
 function Listings (props) {

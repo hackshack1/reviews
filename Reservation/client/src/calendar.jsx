@@ -32,16 +32,6 @@ const Wrapper = styled.div`
     background: white;
   }
 
-  h2 {
-    grid-row: 1;
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
-    margin: 20px 0px;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
   .clear {
     font-size: 14px;
     font-weight: 600;
@@ -62,7 +52,34 @@ const Wrapper = styled.div`
   }
 `;
 
+const MonthLabel = styled.div`
+  width: 100%;
+  overflow: hidden;
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  justify-content: ${props =>
+    props.slideLeft ? 'flex-end' : props.slideRight ? 'flex-start' : 'center'};
+
+  label {
+    margin: 20px 0px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 150ms ease-in;
+  }
+
+  label.slide {
+    transform: ${props =>
+      props.slideLeft
+        ? 'translateX(-220px)'
+        : props.slideRight
+        ? 'translateX(220px)'
+        : 'none'};
+  }
+`;
+
 const Button = styled.button`
+  z-index: 2;
   display: flex;
   align-self: center;
   justify-content: center;
@@ -88,6 +105,7 @@ const RightButton = styled(Button)`
 const Table = styled.table`
   grid-row: 2;
   grid-column: 2;
+  overflow: hidden;
   margin: 10px 0;
   text-align: center;
   empty-cells: hide;
@@ -99,6 +117,15 @@ const Table = styled.table`
     font-size: 12px;
   }
 
+  tbody {
+    transform: ${props =>
+      props.slideLeft
+        ? 'translateX(300px)'
+        : props.slideRight
+        ? 'translateX(-220px)'
+        : 'none'};
+  }
+
   td {
     border: 0.2px solid #dedede;
     height: 40px;
@@ -107,6 +134,13 @@ const Table = styled.table`
     vertical-align: middle;
     font-size: 12px;
     font-weight: 700;
+    transition: transform 100ms ease-in;
+    transform: ${props =>
+      props.slideLeft
+        ? 'translateX(-300px)'
+        : props.slideRight
+        ? 'translateX(220px)'
+        : 'none'};
   }
 `;
 
@@ -123,7 +157,9 @@ class Calendar extends React.Component {
       today: moment().format('MMMM-YYYY-DD'),
       unavailableDays: [],
       hoverDays: [],
-      selectedDays: []
+      selectedDays: [],
+      slideLeft: false,
+      slideRight: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -139,6 +175,18 @@ class Calendar extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('it updating??', prevState.slideLeft, prevState.slideRight);
+    if (prevState.slideLeft || prevState.slideRight) {
+      console.log('will update the slide');
+      const slideLeft = false;
+      const slideRight = false;
+      setTimeout(() => {
+        this.setState({ slideLeft, slideRight });
+      }, 150);
+    }
   }
 
   checkUnavailable() {
@@ -177,12 +225,23 @@ class Calendar extends React.Component {
   }
 
   handleMonthClick(arrow) {
+    console.log('its clicked');
+    let slideLeft = false;
+    let slideRight = false;
     let month =
       arrow === 'left'
         ? this.state.month.subtract(1, 'month')
         : this.state.month.add(1, 'month');
 
-    this.setState({ month });
+    if (arrow === 'left') {
+      slideLeft = true;
+    } else {
+      slideRight = true;
+    }
+
+    this.setState({ slideLeft, slideRight }, () => {
+      this.setState({ month });
+    });
   }
 
   handleDaysHover(month, day, cal) {
@@ -343,7 +402,14 @@ class Calendar extends React.Component {
             ></line>
           </svg>
         </LeftButton>
-        <h2>{this.state.month.format('MMMM YYYY')}</h2>
+        <MonthLabel
+          slideLeft={this.state.slideLeft}
+          slideRight={this.state.slideRight}
+        >
+          <label className="slide">
+            {this.state.month.format('MMMM YYYY')}
+          </label>
+        </MonthLabel>
         <RightButton
           onClick={() => {
             this.handleMonthClick('right');
@@ -380,7 +446,10 @@ class Calendar extends React.Component {
             ></line>
           </svg>
         </RightButton>
-        <Table>
+        <Table
+          slideLeft={this.state.slideLeft}
+          slideRight={this.state.slideRight}
+        >
           <thead>
             <tr>
               {this.state.weekdays.map(day => (
@@ -388,7 +457,7 @@ class Calendar extends React.Component {
               ))}
             </tr>
           </thead>
-          <tbody>{this.createDays(this.state.month)}</tbody>
+          <tbody className="slide">{this.createDays(this.state.month)}</tbody>
         </Table>
         {this.props.checkIn !== 'Check-in' ||
         this.props.checkOut !== 'Check-out' ? (

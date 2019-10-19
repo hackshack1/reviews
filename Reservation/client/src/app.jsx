@@ -122,10 +122,8 @@ export default class App extends React.Component {
       const checkIn = selected;
       const checkOut = 'Check-out';
       selectedDays.unshift(selected);
-      this.setState(
-        { checkIn, checkOut, selectedDays },
-        this.displayCal('checkOut')
-      );
+      const cal = 'checkOut';
+      this.setState({ checkIn, checkOut, selectedDays }, this.displayCal(cal));
     } else {
       const checkOut = selected;
       const cal = '';
@@ -227,7 +225,14 @@ export default class App extends React.Component {
 
   handleReserveClick(boo) {
     const displayConfirmation = boo;
-    this.setState({ displayConfirmation });
+    if (
+      this.state.checkOut !== 'Check-out' &&
+      this.state.checkIn !== 'Check-in'
+    ) {
+      this.setState({ displayConfirmation });
+    } else {
+      this.setState({ cal: 'checkIn' });
+    }
   }
 
   render() {

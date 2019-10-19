@@ -117,6 +117,15 @@ const Table = styled.table`
     font-size: 12px;
   }
 
+  tbody {
+    transform: ${props =>
+      props.slideLeft
+        ? 'translateX(300px)'
+        : props.slideRight
+        ? 'translateX(-220px)'
+        : 'none'};
+  }
+
   td {
     border: 0.2px solid #dedede;
     height: 40px;
@@ -125,6 +134,13 @@ const Table = styled.table`
     vertical-align: middle;
     font-size: 12px;
     font-weight: 700;
+    transition: transform 100ms ease-in;
+    transform: ${props =>
+      props.slideLeft
+        ? 'translateX(-300px)'
+        : props.slideRight
+        ? 'translateX(220px)'
+        : 'none'};
   }
 `;
 

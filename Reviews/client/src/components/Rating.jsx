@@ -19,7 +19,6 @@ const Sprite = styled.div`
     height: 25px;
     width: 25px;
     margin: 0 auto;
-    padding: 0;
     text-shadow: 0px 1px;
   `;
 const AvgRating = styled.div`
@@ -32,6 +31,11 @@ const ReviewCount = styled.div`
     padding-left: 10px;
     font-size:14px;
     font-weight:500;
+`;
+const ReviewText = styled.div`
+    padding-left:5px;
+    font-size:14px;
+    font-weight:200px;
 `;
 
 
@@ -61,15 +65,12 @@ class Rating extends React.Component {
         // })
         return (
             <RatingBox>
-                <div>
-                    <Sprite><RatingIcon/></Sprite>
-                </div>
-                <div>
-                    <AvgRating>{this.props.reviews.avg}</AvgRating>
-                </div>
+                <Sprite><RatingIcon/></Sprite>
+                <AvgRating>{this.props.reviews.avg.toFixed(2)}</AvgRating>
                 <ReviewCount>
                     {this.props.reviews.reviews.length}
                 </ReviewCount>
+                <ReviewText>Reviews</ReviewText>
             </RatingBox>
         )
     }

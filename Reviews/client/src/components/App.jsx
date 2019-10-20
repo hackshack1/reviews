@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Rating from './Rating.jsx'
 import RatingsBars from './RatingsBars.jsx'
 import SearchBar from './SearchBar.jsx'
+import Pagination from './Pagination.jsx'
 
 
 const Wrapper = styled.div`
@@ -46,12 +47,28 @@ class App extends React.Component {
       cleanAvg:0,
       valueAvg:0,
       avg:0,
-
+      postsPerPage:7,
+      currentPage:1,
+      value:'',
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.paginate = this.paginate.bind(this);
   }
+
+  // paginate(pageNumber) {
+  //   console.log('this funciton is invoked')
+  //   this.setState({currentPage:pageNumber});
+  // }
+
+  // const paginate = pageNumber => this.setState({currentPage:pageNumber});
 
   componentDidMount(){
     this.getData();
+  }
+
+  componentDidUpdate(){
+    // this.getData();
   }
 
   getData(){
@@ -87,13 +104,32 @@ class App extends React.Component {
       })
   }
 
+  handleChange(e) {
+    this.setState({value: e.target.value});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    var list = this.state.reviews;
+    var searchValue = this.state.value;
+    var newList = list.filter(review => review.body.toLowerCase().includes(this.state.value.toLowerCase()));
+    this.setState({reviews: newList})
+  }
+
+
   render() {
+
     if(this.state.reviews.length === 0){
       return (
         <div></div>
         )
       }else{
-        console.log(this.state.commsAvg)
+
+        const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
+        const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
+        const currentPosts = this.state.reviews.slice(indexOfFirstPost, indexOfLastPost);
+        const paginate = (pageNumber) => this.setState({currentPage:pageNumber});
+
         return (
         <Wrapper>
           <div>
@@ -102,13 +138,22 @@ class App extends React.Component {
               <br></br>
               <RatingSearchBarContainer>
                 <Rating reviews={this.state}/>
-                <SearchBar/>
+                <SearchBar
+                  value={this.state.value}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                />
               </RatingSearchBarContainer>
               <br></br>
               <RatingsBars reviews={this.state}/>
             </SpecsContainer>
             <br></br>
-            <Reviews reviews={this.state.reviews}/>
+            <Reviews reviews={currentPosts}/>
+            <Pagination
+              postsPerPage={this.state.postsPerPage}
+              totalPosts={this.state.reviews.length}
+              paginate={paginate}
+            />
           </div>
         </Wrapper>
       )

@@ -5,9 +5,7 @@ import styled from 'styled-components';
 const MainSlider = styled.div`
   position: left;
   max-width: 113px;
-
 `
-
 const Wrapper = styled.div`
   display: flex;
   position: absolute;

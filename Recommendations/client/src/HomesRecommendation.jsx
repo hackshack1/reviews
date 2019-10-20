@@ -7,39 +7,34 @@ import styled from 'styled-components';
 
 const MainWrapper = styled.div`
   font-family: Helvetica Neue, sans-serif;
-  text-align: center;
-  border: 1px solid yellow;
-  height: 420px;
   position:relative;
+  height: 420px;
+  /* margin: auto; */
+  /* text-align: center; */
+  border: 1px solid yellow;
   // flex-direction: row;
   // flex:1;
 `;
-const PrevDiv = styled.div`
-  position: absolute;
-  margin: auto;
-  height:420px;
+// const PrevDiv = styled.div`
+//   position: absolute;
+//   margin: auto;
+//   height:420px;
 
 
-`;
-const PrevButton = styled.button`
-  animation: slide 0.5s forwards; 
-  position: absolute;
-  font-family: 'Nanum Myeongjo', serif;
-  text-align: center;
-  top: 50%;
-`;
+// `;
 
 // const PrevButton:after 
-const ArrowContainer = styled.div`
-  position:absolute;
-  border: 1px solid red;
+// const ArrowContainer = styled.div`
+//   position:absolute;
+// `
 
-`
 const Container = styled.div`
   width: 915px;
   height:420px;
-  border: 1px dashed yellow;
-  display: inline-block;
+  border: 1px dashed red;
+  position: relative;
+  /* display: inline-block; */
+  margin:auto;
   overflow: hidden;
   @media(max-width: 992px) {
     width:600px;
@@ -49,23 +44,42 @@ const ListingsDiv = styled.div`
   position:relative;
   // border: 1px solid red;
   height: 350px;
+  list-style:none;
 `;
-const NextDiv = styled.div`
-position: absolute;
-display:inline-block
-text-align: right;
-top:0%;
-left: 88%;
-height:420px;
+// const NextDiv = styled.div`
+// position: absolute;
+// display:inline-block
+// text-align: right;
+// top: 0;
+// left: 88%;
+// height: 420px;
+// `;
+const PrevButton = styled.button` 
+  position: absolute;
+  display: inline-block;
+  font-family: 'Nanum Myeongjo', serif;
+  /* text-align: center; */
+  top: 50%;
+  transform:translateY(-50%);
+  /* background:transparent; */
+  /* border:0; */
+  cursor:pointer;
+  left:0%;
 `;
 
 const NextButton = styled.button`
   position: absolute;
   font-family: 'Nanum Myeongjo', serif;
   top:50%;
-
+  display: inline-block;
+  transform:translateY(-50%);
+  /* background:transparent; */
+  /* border:0; */
+  cursor:pointer;
+  right:0%;
 
 `;
+
 
 const Title = styled.h2`
   text-align: left;
@@ -117,20 +131,28 @@ class HomesRecommendation extends React.Component {
 
   render() {
     return (
+      // <MainWrapper>
+      //   <PrevDiv className="innerdiv">
+      //     <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}> &#8249; </PrevButton>
+      //   </PrevDiv>
+      //   <Container>
+      //     <Title>More homes you may like</Title>
+      //     <ListingsDiv>
+
+      //     <Listings allListings={this.state.allListings} currIndex={this.state.currIndex}/>
+      //     </ListingsDiv>
+      //   </Container>
+      //   <NextDiv>   
+      //     <NextButton id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-3}> &#8250; </NextButton>
+      //   </NextDiv>
+      // </MainWrapper>
       <MainWrapper>
-        <PrevDiv className="innerdiv">
-          <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}> &#8249; </PrevButton>
-        </PrevDiv>
+        <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}> &#8249; </PrevButton>
         <Container>
           <Title>More homes you may like</Title>
-          <ListingsDiv>
-
           <Listings allListings={this.state.allListings} currIndex={this.state.currIndex}/>
-          </ListingsDiv>
         </Container>
-        <NextDiv>   
-          <NextButton id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-3}> &#8250; </NextButton>
-        </NextDiv>
+        <NextButton id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-3}> &#8250; </NextButton>
       </MainWrapper>
     );
   }
@@ -138,4 +160,4 @@ class HomesRecommendation extends React.Component {
 
 export default HomesRecommendation;
 
-// &#8250;git a
+// &#8250;

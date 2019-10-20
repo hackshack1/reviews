@@ -15,8 +15,10 @@ const Image = styled.img`
   width: 290px;
   height: 200px;
   border-radius: 3px;
+  :hover {
+    color:grey;
+  }
 `
-
 const TypeCity = styled.p`
   text-align: left;
   line-height: 5px;
@@ -36,7 +38,6 @@ const Title = styled.p`
   font-weight: 450;
 
 `
-
 const Price = styled.p`
   text-align: left;
   line-height: 5px;
@@ -75,27 +76,82 @@ const Reviews = styled.span`
   font-weight: 300;
   
 `
+const PicsCarouselWrapper = styled.div`
+  position:relative;
+  
+`
+const Nav = styled.div`
+  position: absolute;
+  top:180px;
+  display:flex;
+  /* justify-content:center; */
+  padding: 10px 0;
+  margin: 0 auto;
+  left: 25%;
+  
+`
+
+const Bubbles = styled.button`
+  
+  border:0;
+  border-radius: 50%;
+
+  background:rgba(255,255,255,.3);
+  margin: 0 5px;
+  /* text-align:center; */
+`
+const InnerLeft = styled.button`
+  position: absolute;
+  top:0;
+  height: 200px;
+  width: 50px;
+  border:0;
+  background:rgba(255,255,255,.3);
+
+`
+const InnerRight = styled.button`
+  position: absolute;
+  top:0;
+  Right:0;
+  height: 200px;
+  width: 50px;
+  border:0;
+  background:rgba(255,255,255,.3);
+
+`
+const Favs = styled.button`
+
+`
 
 function Listing (props) {
   return (
 
     <Wrapper>
-
-        <Image src="https://s7d4.scene7.com/is/image/roomandboard/wyatt_438274_19e_g?scl=1&size=804,1000&$mobile$" ></Image>
-        <TypeCity> {props.listing.homeType} • {props.listing.cityName} </TypeCity>
-        <Title> {props.listing.title} </Title>
-        <Price> ${props.listing.price}/night </Price>
-        <DivImage>
-          <SpanImage>
-            <Star src="https://cdn10.bigcommerce.com/s-npe4l/products/1418/images/2090/M-REC-DGRSTAR---HIGH__37390.1531409269.100.100.jpg?c=2"></Star>
-          </SpanImage><Reviews> 
-          <Rating>{props.listing.rating}</Rating> ({props.listing.reviewCount}) </Reviews>
-
-        </DivImage>
-
-
-
-
+      <PicsCarouselWrapper>
+        <div>
+          <Image src="https://s7d4.scene7.com/is/image/roomandboard/wyatt_438274_19e_g?scl=1&size=804,1000&$mobile$" ></Image>
+        </div>
+        <Nav>
+          <Bubbles></Bubbles>
+          <Bubbles></Bubbles>
+          <Bubbles></Bubbles>
+          <Bubbles></Bubbles>
+          <Bubbles></Bubbles>
+          <Bubbles></Bubbles>
+        </Nav>
+        <InnerLeft>&#8249;</InnerLeft>
+        <InnerRight>&#8250;</InnerRight>
+        <Favs>&#9825;</Favs>
+      </PicsCarouselWrapper>
+      <TypeCity> {props.listing.homeType} • {props.listing.cityName} </TypeCity>
+      <Title> {props.listing.title} </Title>
+      <Price> ${props.listing.price}/night </Price>
+      <DivImage>
+        <SpanImage>
+          <Star src="https://cdn10.bigcommerce.com/s-npe4l/products/1418/images/2090/M-REC-DGRSTAR---HIGH__37390.1531409269.100.100.jpg?c=2"></Star>
+        </SpanImage><Reviews> 
+        <Rating>{props.listing.rating}</Rating> ({props.listing.reviewCount}) </Reviews>
+      </DivImage>
     </Wrapper>
 
   )

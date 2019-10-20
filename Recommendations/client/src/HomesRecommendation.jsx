@@ -10,6 +10,7 @@ const MainWrapper = styled.div`
   text-align: center;
   border: 1px solid yellow;
   height: 420px;
+  position:relative;
   // flex-direction: row;
   // flex:1;
 `;
@@ -29,6 +30,11 @@ const PrevButton = styled.button`
 `;
 
 // const PrevButton:after 
+const ArrowContainer = styled.div`
+  position:absolute;
+  border: 1px solid red;
+
+`
 const Container = styled.div`
   width: 915px;
   height:420px;
@@ -48,17 +54,14 @@ const NextDiv = styled.div`
 position: absolute;
 display:inline-block
 text-align: right;
-top:50%;
-border: 2px solid red;
-// margin: auto;
+top:0%;
+left: 88%;
 height:420px;
 `;
 
 const NextButton = styled.button`
-  animation: slide 0.5s forwards; 
   position: absolute;
   font-family: 'Nanum Myeongjo', serif;
-  text-align: center;
   top:50%;
 
 
@@ -135,4 +138,4 @@ class HomesRecommendation extends React.Component {
 
 export default HomesRecommendation;
 
-// &#8250;
+// &#8250;git a

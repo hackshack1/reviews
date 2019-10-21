@@ -223,7 +223,6 @@ class Calendar extends React.Component {
   }
 
   handleMonthClick(arrow) {
-    console.log('its clicked');
     let slideLeft = false;
     let slideRight = false;
     let month =

@@ -44,7 +44,9 @@ const TotalPrice = props => {
       </section>
       <section className="total">
         <span>Total</span>
-        <span>${props.newPrice + props.serviceFee + feesNTaxes}</span>
+        <span className="totalCost">
+          ${props.newPrice + props.serviceFee + feesNTaxes}
+        </span>
       </section>
     </Wrapper>
   );

@@ -47,6 +47,7 @@ const Dates = props => (
     <Label>Dates</Label>
     <InputWrapper>
       <Input
+        id="calInput"
         cal={props.cal}
         checkIn={props.checkIn}
         onClick={() => {
@@ -87,6 +88,7 @@ const Dates = props => (
         ></line>
       </svg>
       <Input
+        id="calInput"
         cal={props.cal}
         checkOut={props.checkOut}
         onClick={() => {

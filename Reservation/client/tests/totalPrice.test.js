@@ -14,4 +14,23 @@ describe('TotalPrice Unit Tests', () => {
 
     expect(wrapper.find('Cleaning Fee').length).toBe(0);
   });
+
+  test('it should render the price correctly base on the props', () => {
+    const wrapper = shallow(
+      <TotalPrice
+        basePrice={100}
+        newPrice={100}
+        nights={1}
+        serviceFee={10}
+        taxes={0.1}
+        cleaningFee={10}
+      />
+    );
+    expect(
+      wrapper
+        .find('.totalCost')
+        .html()
+        .includes('120')
+    ).toBeTruthy();
+  });
 });

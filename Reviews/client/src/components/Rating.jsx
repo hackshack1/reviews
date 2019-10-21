@@ -15,11 +15,10 @@ const Sprite = styled.div`
     justify-content: left;
     unicode-bidi: bidi-override;
     color: rgb(0, 132, 137);
-    font-size: 12px;
+    font-size: 10px;
     height: 25px;
     width: 25px;
     margin: 0 auto;
-    padding: 0;
     text-shadow: 0px 1px;
   `;
 const AvgRating = styled.div`
@@ -32,6 +31,11 @@ const ReviewCount = styled.div`
     padding-left: 10px;
     font-size:14px;
     font-weight:500;
+`;
+const ReviewText = styled.div`
+    padding-left:5px;
+    font-size:14px;
+    font-weight:200px;
 `;
 
 
@@ -56,17 +60,17 @@ class Rating extends React.Component {
 
 
     render() {
+        // this.props.reviews.forEach((review)=>{
+        //     console.log(review)
+        // })
         return (
             <RatingBox>
-                <div>
-                    <Sprite><RatingIcon/></Sprite>
-                </div>
-                <div>
-                    <AvgRating>{this.state.rating}</AvgRating>
-                </div>
+                <Sprite><RatingIcon/></Sprite>
+                <AvgRating>{this.props.reviews.avg.toFixed(2)}</AvgRating>
                 <ReviewCount>
-                    20 Reviews
+                    {this.props.reviews.reviews.length}
                 </ReviewCount>
+                <ReviewText>Reviews</ReviewText>
             </RatingBox>
         )
     }

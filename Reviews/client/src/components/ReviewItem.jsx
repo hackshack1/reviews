@@ -20,7 +20,9 @@ const Photo = styled.img`
     border-radius: 50%;
     box-sizing: border-box;
     height: 47.9861px;
-    width: 47.9861px
+    width: 47.9861px;
+    padding: 5px;
+
 `;
 const CustomerName = styled.div`
     font-size: 16px;

@@ -7,30 +7,46 @@ import Guests from './guests';
 import TotalPrice from './totalPrice';
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
   border: 1px solid #dedede;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #454545;
   position: relative;
   z-index: 0;
   display: grid;
-  width: 370px;
+  grid-template-columns: 100%;
+  width: 400px;
   float: right;
-  padding: 15px;
+  padding: 25px;
   margin: 20px 30px;
   grid-gap: 15px;
+
+  .minStay {
+    font-size: 13px;
+    padding: 5px 0px;
+  }
+
+  .notice {
+    justify-self: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
 `;
 
 const Price = styled.section`
-  font-size: 0.5em;
+  box-sizing: border-box;
+  font-size: 12px;
   font-weight: 400;
-  padding: 5px;
+  width: 100%;
   padding-bottom: 20px;
   justify-self: start;
   border-bottom: 1px solid #dedede;
 `;
 
 const Rate = styled.span`
-  font-size: 4em;
+  font-size: 20px;
   font-weight: 700;
+  margin-right: 2px;
 `;
 
 const ReserveButton = styled.button`
@@ -74,6 +90,7 @@ export default class App extends React.Component {
 
     this.displayCal = this.displayCal.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleGuestClick = this.handleGuestClick.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
@@ -150,6 +167,43 @@ export default class App extends React.Component {
     }
   }
 
+  handleClearClick(callback) {
+    const checkOut = 'Check-out';
+    const checkIn = 'Check-in';
+    const selectedDays = [];
+    const nights = 0;
+    const displayTotal = false;
+
+    this.setState(
+      { checkOut, checkIn, selectedDays, nights, displayTotal },
+      callback
+    );
+  }
+
+  checkMinStay() {
+    let { checkIn, checkOut, minStayWeekday, minStayWeekend } = this.state;
+    const defaultText = (
+      <div className="minStay">Add dates for exact pricing</div>
+    );
+    if (checkIn !== 'Check-in') {
+      if (checkOut !== 'Check-out') {
+        return null;
+      }
+
+      checkIn = moment(checkIn).day();
+      let minDays =
+        checkIn >= 1 && checkIn <= 5 ? minStayWeekday : minStayWeekend;
+
+      if (minDays > 0) {
+        return <div className="minStay">Minimum stay: {minDays} nights</div>;
+      } else {
+        return defaultText;
+      }
+    } else {
+      return defaultText;
+    }
+  }
+
   calculatePrice() {
     const { basePrice, checkIn, checkOut } = this.state;
     let displayTotal = true;
@@ -170,6 +224,7 @@ export default class App extends React.Component {
           <Rate>${this.state.basePrice}</Rate>
           per night
         </Price>
+        {this.checkMinStay()}
         <Dates
           reservations={this.state.reservations}
           checkIn={this.state.checkIn}
@@ -178,6 +233,7 @@ export default class App extends React.Component {
           displayCal={this.displayCal}
           cal={this.state.cal}
           handleDateClick={this.handleDateClick}
+          handleClearClick={this.handleClearClick}
           minStayWeekday={this.state.minStayWeekday}
           minStayWeekdend={this.state.minStayWeekdend}
         />
@@ -189,6 +245,7 @@ export default class App extends React.Component {
           adults={this.state.adults}
           children={this.state.children}
           infants={this.state.infants}
+          maxGuest={this.state.maxGuest}
         />
         {this.state.displayTotal ? (
           <TotalPrice
@@ -201,6 +258,7 @@ export default class App extends React.Component {
           />
         ) : null}
         <ReserveButton>Reserve</ReserveButton>
+        <div className="notice">You won't be charged yet</div>
       </Wrapper>
     );
   }

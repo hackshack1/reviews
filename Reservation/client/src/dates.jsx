@@ -3,13 +3,13 @@ import Calendar from './calendar';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 5px;
+  padding: 5px 0px;
 `;
 const Label = styled.label`
   display: block;
-  margin: 2px;
+  margin-bottom: 3px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const InputWrapper = styled.div`
@@ -23,21 +23,23 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   display: inline-block;
   vertical-align: middle;
-  width: 100px;
+  font-size: 16px;
+  font-weight: 300;
+  color: ${props =>
+    props.checkIn === 'Check-in' || props.checkOut === 'Check-out'
+      ? '#707070'
+      : '#454545'};
+  width: 135px;
   margin: 5px;
-  padding: 3px;
+  padding: 5px;
   border: none;
   ${props =>
-    props.cal === 'checkOut'
+    (props.cal === 'checkOut' && props.checkOut) ||
+    (props.cal === 'checkIn' && props.checkIn)
       ? `background-color: #a0f2ea;
   outline: none;
   border-radius: 3px;`
       : null}
-  :focus {
-    background-color: #a0f2ea;
-    outline: none;
-    border-radius: 3px;
-  }
 `;
 
 const Dates = props => (
@@ -45,6 +47,8 @@ const Dates = props => (
     <Label>Dates</Label>
     <InputWrapper>
       <Input
+        cal={props.cal}
+        checkIn={props.checkIn}
         onClick={() => {
           props.displayCal('checkIn');
         }}
@@ -84,6 +88,7 @@ const Dates = props => (
       </svg>
       <Input
         cal={props.cal}
+        checkOut={props.checkOut}
         onClick={() => {
           props.displayCal('checkOut');
         }}
@@ -92,7 +97,7 @@ const Dates = props => (
         value={props.checkOut}
       />
     </InputWrapper>
-    {props.cal === 'checkIn' ? (
+    {props.cal === 'checkIn' || props.cal === 'checkOut' ? (
       <Calendar
         reservations={props.reservations}
         checkIn={props.checkIn}
@@ -100,19 +105,7 @@ const Dates = props => (
         selectedDays={props.selectedDays}
         cal={props.cal}
         handleDateClick={props.handleDateClick}
-        displayCal={props.displayCal}
-        minStayWeekday={props.minStayWeekday}
-        minStayWeekend={props.minStayWeekend}
-      />
-    ) : null}
-    {props.cal === 'checkOut' ? (
-      <Calendar
-        reservations={props.reservations}
-        checkIn={props.checkIn}
-        checkOut={props.checkOut}
-        selectedDays={props.selectedDays}
-        cal={props.cal}
-        handleDateClick={props.handleDateClick}
+        handleClearClick={props.handleClearClick}
         displayCal={props.displayCal}
         minStayWeekday={props.minStayWeekday}
         minStayWeekend={props.minStayWeekend}

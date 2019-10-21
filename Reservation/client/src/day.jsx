@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 const Cell = styled.td`
+  :hover {
+    cursor: default;
+  }
+
   ${props =>
     props.isSelected
       ? `background-color: #02A699;
         color: white;`
       : props.unavailable
       ? `text-decoration: line-through #dedede; 
-      color: #dedede;
-      :hover {cursor: default;}`
-      : props.cal === 'checkIn'
+      color: #dedede;`
+      : props.cal === 'checkIn' || (props.cal === 'checkOut' && !props.isHover)
       ? `:hover {
         background-color: #E4E7E7;
         cursor: pointer;

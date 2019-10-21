@@ -178,9 +178,7 @@ class Calendar extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('it updating??', prevState.slideLeft, prevState.slideRight);
     if (prevState.slideLeft || prevState.slideRight) {
-      console.log('will update the slide');
       const slideLeft = false;
       const slideRight = false;
       setTimeout(() => {

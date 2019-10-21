@@ -17,7 +17,7 @@ const createRecords = mockList => {
       return Reservation.sync().then(() => {
         let currentDate = moment();
 
-        for (let k = 0; k < 3; k++) {
+        for (let k = 0; k < 5; k++) {
           const totalNights = minStay + Math.floor(Math.random() * 5) + 1;
           Reservation.create({
             user: faker.name.findName(),
@@ -36,7 +36,7 @@ const createRecords = mockList => {
     });
 };
 
-for (let k = 0; k < 3; k++) {
+for (let k = 0; k < 100; k++) {
   const listing = {
     location: faker.address.streetAddress(),
     basePrice: 90 + k,

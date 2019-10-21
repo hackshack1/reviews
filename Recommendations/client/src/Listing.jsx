@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Favorites from './Favorites.jsx';
 
 const Wrapper = styled.span`
   display: inline-block;
@@ -7,8 +8,8 @@ const Wrapper = styled.span`
   margin: 3.5px;
   padding: 4px;
   vertical-align: top;
-  color: rbg(72,72,72)
-  background-color: #fff
+  color: rbg(72,72,72);
+  background-color: #fff;
 `
 const Image = styled.img`
   display: block;
@@ -27,7 +28,6 @@ const TypeCity = styled.p`
   font-size: 10.5px;
   font-weight: 550;
   padding-top: 3.2px;
-
 `
 
 const Title = styled.p`
@@ -36,7 +36,6 @@ const Title = styled.p`
   color: #413939;
   font-size: 16px;
   font-weight: 450;
-
 `
 const Price = styled.p`
   text-align: left;
@@ -44,8 +43,6 @@ const Price = styled.p`
   color: #534848;
   font-size: 12px;
   font-weight: 300;
-
-  
 `
 const DivImage = styled.div`
   float:left;
@@ -60,7 +57,6 @@ const Star = styled.img`
   height: 10px;
   display: inline-block;
   padding-top: 0;
-  
 `
 const Rating = styled.b`
   font-weight:500;
@@ -74,11 +70,9 @@ const Reviews = styled.span`
   color: grey;
   font-size: 10.8px;
   font-weight: 300;
-  
 `
 const PicsCarouselWrapper = styled.div`
   position:relative;
-  
 `
 const Nav = styled.div`
   position: absolute;
@@ -88,14 +82,11 @@ const Nav = styled.div`
   padding: 10px 0;
   margin: 0 auto;
   left: 25%;
-  
 `
 
-const Bubbles = styled.button`
-  
+const Bubbles = styled.button` 
   border:0;
   border-radius: 50%;
-
   background:rgba(255,255,255,.3);
   margin: 0 5px;
   /* text-align:center; */
@@ -119,14 +110,16 @@ const InnerRight = styled.button`
   background:rgba(255,255,255,.3);
 
 `
-const Favs = styled.button`
-
+const FavsButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `
 
 function Listing (props) {
   return (
-
     <Wrapper>
+      {/* {this.state.displayPopup ? (<Favorites handlePopup={props.handlePopup}/>) : null} */}
       <PicsCarouselWrapper>
         <div>
           <Image src="https://s7d4.scene7.com/is/image/roomandboard/wyatt_438274_19e_g?scl=1&size=804,1000&$mobile$" ></Image>
@@ -141,7 +134,7 @@ function Listing (props) {
         </Nav>
         <InnerLeft>&#8249;</InnerLeft>
         <InnerRight>&#8250;</InnerRight>
-        <Favs>&#9825;</Favs>
+        <FavsButton >&#9825; </FavsButton>
       </PicsCarouselWrapper>
       <TypeCity> {props.listing.homeType} • {props.listing.cityName} </TypeCity>
       <Title> {props.listing.title} </Title>
@@ -153,8 +146,6 @@ function Listing (props) {
         <Rating>{props.listing.rating}</Rating> ({props.listing.reviewCount}) </Reviews>
       </DivImage>
     </Wrapper>
-
   )
 }
-
 export default Listing;

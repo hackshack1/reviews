@@ -9,8 +9,6 @@ const MainWrapper = styled.div`
   font-family: Helvetica Neue, sans-serif;
   position:relative;
   height: 420px;
-  /* margin: auto; */
-  /* text-align: center; */
   border: 1px solid yellow;
   // flex-direction: row;
   // flex:1;
@@ -92,10 +90,12 @@ class HomesRecommendation extends React.Component {
     this.state = {
       currIndex: 0,
       allListings: [],
-      pic1: []
+      pic1: [],
+      displayPopup: false
     }
     this.nextThree = this.nextThree.bind(this);
     this.prevThree = this.prevThree.bind(this);
+    this.handlePopup = this.handlePopup.bind(this);
     // this.currentThreeListings = this.currentThreeListings.bind(this);
   }
 
@@ -127,6 +127,9 @@ class HomesRecommendation extends React.Component {
     // this.setState({pageListings: threeListings, currIndex:newIndex});
   }
 
+  handlePopup (boolean) {
+    this.setState({displayPopup: boolean});
+  }
 
 
   render() {
@@ -150,14 +153,13 @@ class HomesRecommendation extends React.Component {
         <PrevButton id="outterLeftArrow" onClick={() => this.prevThree()} disabled={this.state.currIndex===0}> &#8249; </PrevButton>
         <Container>
           <Title>More homes you may like</Title>
-          <Listings allListings={this.state.allListings} currIndex={this.state.currIndex}/>
+          <Listings allListings={this.state.allListings} currIndex={this.state.currIndex} />
         </Container>
         <NextButton id="outterRightArrow" onClick={()=>this.nextThree()} disabled={this.state.currIndex === this.state.allListings.length-3}> &#8250; </NextButton>
       </MainWrapper>
     );
   }
 }
-
 export default HomesRecommendation;
 
-// &#8250;
+// handlePopup={this.state.handlePopup}

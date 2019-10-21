@@ -17,7 +17,7 @@ function Listings (props) {
   return (
     <MainSlider className="inner">
       <Wrapper style={{'transform': `translateX(-${props.currIndex*(100/props.allListings.length)}%)`}}>
-      {props.allListings.map(listing=> <Listing listing={listing}/>)}
+      {props.allListings.map(listing=> <Listing listing={listing} handlePopup={props.handlePopup}/>)}
       </Wrapper>
 
     </MainSlider>

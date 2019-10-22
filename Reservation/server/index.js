@@ -6,6 +6,17 @@ const query = require('../database/query.js');
 const app = express();
 const port = 3015;
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
+app.use(express.static(path.join(__dirname, '/../public')));
+
 app.use(
   '/air6n6/*/listing',
   express.static(path.join(__dirname, '/../public'))

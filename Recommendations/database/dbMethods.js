@@ -16,5 +16,15 @@ const getAllFromHomes = (cb) => {
   })
 }
 
-module.exports={getAllFromHomes: getAllFromHomes}
+const getCurrListing = (cb, listingId) => {
+  const queryString = `select from listings where id="${listingId}";`
+  db.query(queryString, (err, dbResObj)=> {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, dbResObj);
+    }
+  })
+}
+module.exports={getAllFromHomes: getAllFromHomes, getCurrListing: getCurrListing}
 

@@ -3,8 +3,6 @@ import axios from 'axios';
 import Listings from './Listings.jsx';
 import styled from 'styled-components';
 
-
-
 const MainWrapper = styled.div`
   font-family: Helvetica Neue, sans-serif;
   position:relative;
@@ -17,7 +15,6 @@ const MainWrapper = styled.div`
 //   position: absolute;
 //   margin: auto;
 //   height:420px;
-
 
 // `;
 
@@ -89,6 +86,7 @@ class HomesRecommendation extends React.Component {
     super(props);
     this.state = {
       currIndex: 0,
+      currListing: [],
       allListings: [],
       pic1: [],
       displayPopup: false
@@ -99,10 +97,15 @@ class HomesRecommendation extends React.Component {
     // this.currentThreeListings = this.currentThreeListings.bind(this);
   }
 
-
-
   componentDidMount () {
-    axios.get("/allHomes").then((res) => this.setState({allListings: res.data, pageListings: res.data.slice(0,3)}));
+      let id = window.location.href.split('/')[4];
+      axios.get("/currentListing", {params: {id:id}}).then(result => {
+        let listing = result.data[0];
+        console.log(results.data)
+        // callback(listing)
+      })
+  }
+    // axios.get("/allHomes").then((res) => this.setState({allListings: res.data, pageListings: res.data.slice(0,3)}));
     // console.log(this.state.allListings)
   }
 

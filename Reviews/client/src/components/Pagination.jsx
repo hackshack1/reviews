@@ -1,4 +1,31 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgb(72, 72, 72);
+`;
+
+const PageNumber = styled.div`
+  padding:10px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background-color: rgb(0, 132, 137);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+`;
+
+const PageLink = styled.a`
+  color: rgb(255, 255, 255) !important;
+  text-decoration: none;
+`;
+
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -8,15 +35,15 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   }
   return (
     <nav>
-      <ul className='pagination'>
+      <Wrapper>
         {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='#!' className='page-link'>
+          <PageNumber key={number} className='page-item'>
+            <PageLink onClick={() => paginate(number)} href='#!' className='page-link'>
               {number}
-            </a>
-          </li>
+            </PageLink>
+          </PageNumber>
         ))}
-      </ul>
+      </Wrapper>
     </nav>
   );
 };

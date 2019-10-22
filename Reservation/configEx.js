@@ -1,3 +1,3 @@
-const sqlPW; //set sqlPW to your PW;
+const sqlPW = 'password';
 
 module.exports = {sqlPW};

@@ -6,7 +6,7 @@ To start server:
 
 To seed database:
 
-- npm makdeDB
+- npm makeDB
 - npm seed
 
 Please copy the configEx.js file, and save it as config.js. If your mysql has a password, please enter it in the config.js file.

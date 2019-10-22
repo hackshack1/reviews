@@ -2,7 +2,7 @@ const mongoose = require('../../database/connection.js');
 
 module.exports = {
     getAll: (req, res) => {
-        mongoose.Reviews.find((err, data) =>{
+        mongoose.Reviews.find({listingID: 0}, (err, data) =>{
             if(err){
                 console.log(`Could not retrieve data ${err}`)
             }else{

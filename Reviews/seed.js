@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/reviews',{useNewUrlParser:true});
 
-var generateNewReview = () => {
+var generateNewReview = (i) => {
     return new Reviews({
-        listingID: '000001',
+
+        listingID: i,
         host: {
             hostID: 'H00001',
             hostName: 'Jimmy',
@@ -26,9 +27,9 @@ var generateNewReview = () => {
 }
 
  async function createReviews() {
-     for(var i = 0; i < 10; i++){
+     for(var i = 0; i < 100; i++){
          console.log(i)
-         await generateNewReview().save()
+         await generateNewReview(i).save()
      }
      exit()
  }

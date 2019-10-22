@@ -9,10 +9,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open',() => console.log('DB connected'));
 
 var reviewsSchema = new mongoose.Schema ({
-    listing: {
-        listingID: String,
-        listingName: String,
-    },
+    listingID: Number,
     host: {
         hostID: String,
         hostName: String,

@@ -7,7 +7,7 @@ const app = express();
 const port = 3015;
 
 app.use(
-  '/reservation/*/listing',
+  '/air6n6/*/listing',
   express.static(path.join(__dirname, '/../public'))
 );
 

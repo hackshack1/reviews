@@ -22,7 +22,7 @@ var generateNewReview = (i) => {
             cleanliness: 4,
             value: 5,
         },
-        reviews:dummyData
+        reviews:dummyData()
     })
 }
 

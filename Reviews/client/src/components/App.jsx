@@ -72,7 +72,8 @@ class App extends React.Component {
   }
 
   getData(){
-    Axios.get('/reviews')
+    let id = window.location.href.split('/')[4]
+    Axios.get('/reviews',{params:{listingID:id}})
       .then((res)=>{
         var reviews = res.data[0].reviews
         var commsArr = reviews.map((review) => review.ratings.communication);

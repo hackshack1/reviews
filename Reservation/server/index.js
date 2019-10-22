@@ -4,13 +4,15 @@ const path = require('path');
 const query = require('../database/query.js');
 
 const app = express();
-const port = 3010;
+const port = 3015;
 
-app.use(express.static(path.join(__dirname, '/../public')));
+app.use(
+  '/air6n6/*/listing',
+  express.static(path.join(__dirname, '/../public'))
+);
 
 app.get('/now', (req, res) => {
-  const month = moment(req.query.date).month() + 1;
-  query.getTwoMonth(1, month, res.send.bind(res));
+  query.getRsvps(req.query.id, res.send.bind(res));
 });
 
 app.listen(port, () =>

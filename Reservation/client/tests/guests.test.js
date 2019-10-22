@@ -17,7 +17,10 @@ describe('Guest Selection Unit Tests', () => {
   test('it should call handleGuestClick once the minus/plus button is clicked', () => {
     const mockClickHandler = jest.fn();
     const wrapper = shallow(
-      <GuestDropdown handleGuestClick={mockClickHandler} />
+      <GuestDropdown
+        handleGuestClick={mockClickHandler}
+        handleDropdownClick={() => {}}
+      />
     );
 
     wrapper.find('button').forEach(node => {

@@ -5,12 +5,16 @@ import request from '../request';
 import Dates from './dates';
 import Guests from './guests';
 import TotalPrice from './totalPrice';
+import Confirmation from './confirmation';
 
 const Wrapper = styled.div`
-  box-sizing: border-box;
-  border: 1px solid #dedede;
   font-family: 'Nunito Sans', sans-serif;
   color: #454545;
+`;
+
+const ReservationWrapper = styled.div`
+  box-sizing: border-box;
+  border: 1px solid #dedede;
   position: relative;
   z-index: 0;
   display: grid;
@@ -23,6 +27,7 @@ const Wrapper = styled.div`
 
   .minStay {
     font-size: 13px;
+    font-weight: 300;
     padding: 5px 0px;
   }
 
@@ -52,12 +57,11 @@ const Rate = styled.span`
 const ReserveButton = styled.button`
   background-color: #f25764;
   color: white;
-  border-radius: 8px;
+  border-radius: 5px;
   text-align: center;
-  font-size: 16px
-  font-weight: 500;
-  padding: 10px;
-  margin: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px;
 `;
 
 export default class App extends React.Component {
@@ -85,7 +89,8 @@ export default class App extends React.Component {
       instantBooked: true,
       cal: '',
       displayDropdown: false,
-      displayTotal: false
+      displayTotal: false,
+      displayConfirmation: false
     };
 
     this.displayCal = this.displayCal.bind(this);
@@ -94,6 +99,7 @@ export default class App extends React.Component {
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleGuestClick = this.handleGuestClick.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
+    this.handleReserveClick = this.handleReserveClick.bind(this);
   }
 
   componentDidMount() {
@@ -117,7 +123,7 @@ export default class App extends React.Component {
       const checkOut = 'Check-out';
       selectedDays.unshift(selected);
       const cal = 'checkOut';
-      this.setState({ checkIn, checkOut, cal, selectedDays });
+      this.setState({ checkIn, checkOut, selectedDays }, this.displayCal(cal));
     } else {
       const checkOut = selected;
       const cal = '';
@@ -173,9 +179,10 @@ export default class App extends React.Component {
     const selectedDays = [];
     const nights = 0;
     const displayTotal = false;
+    const cal = 'checkIn';
 
     this.setState(
-      { checkOut, checkIn, selectedDays, nights, displayTotal },
+      { checkOut, checkIn, selectedDays, nights, displayTotal, cal },
       callback
     );
   }
@@ -217,48 +224,71 @@ export default class App extends React.Component {
     this.setState({ newPrice, nights, displayTotal });
   }
 
+  handleReserveClick(boo) {
+    const displayConfirmation = boo;
+    if (
+      this.state.checkOut !== 'Check-out' &&
+      this.state.checkIn !== 'Check-in'
+    ) {
+      this.setState({ displayConfirmation });
+    } else {
+      this.setState({ cal: 'checkIn' });
+    }
+  }
+
   render() {
     return (
       <Wrapper>
-        <Price>
-          <Rate>${this.state.basePrice}</Rate>
-          per night
-        </Price>
-        {this.checkMinStay()}
-        <Dates
-          reservations={this.state.reservations}
-          checkIn={this.state.checkIn}
-          checkOut={this.state.checkOut}
-          selectedDays={this.state.selectedDays}
-          displayCal={this.displayCal}
-          cal={this.state.cal}
-          handleDateClick={this.handleDateClick}
-          handleClearClick={this.handleClearClick}
-          minStayWeekday={this.state.minStayWeekday}
-          minStayWeekdend={this.state.minStayWeekdend}
-        />
-        <Guests
-          guestAmt={this.state.guestAmt}
-          displayDropdown={this.state.displayDropdown}
-          handleDropdownClick={this.handleDropdownClick}
-          handleGuestClick={this.handleGuestClick}
-          adults={this.state.adults}
-          children={this.state.children}
-          infants={this.state.infants}
-          maxGuest={this.state.maxGuest}
-        />
-        {this.state.displayTotal ? (
-          <TotalPrice
-            basePrice={this.state.basePrice}
-            newPrice={this.state.newPrice}
-            nights={this.state.nights}
-            serviceFee={this.state.serviceFee}
-            taxes={this.state.taxes}
-            cleaningFee={this.state.cleaningFee}
+        <ReservationWrapper>
+          <Price>
+            <Rate>${this.state.basePrice}</Rate>
+            per night
+          </Price>
+          {this.checkMinStay()}
+          <Dates
+            reservations={this.state.reservations}
+            checkIn={this.state.checkIn}
+            checkOut={this.state.checkOut}
+            selectedDays={this.state.selectedDays}
+            displayCal={this.displayCal}
+            cal={this.state.cal}
+            handleDateClick={this.handleDateClick}
+            handleClearClick={this.handleClearClick}
+            minStayWeekday={this.state.minStayWeekday}
+            minStayWeekdend={this.state.minStayWeekdend}
           />
+          <Guests
+            guestAmt={this.state.guestAmt}
+            displayDropdown={this.state.displayDropdown}
+            handleDropdownClick={this.handleDropdownClick}
+            handleGuestClick={this.handleGuestClick}
+            adults={this.state.adults}
+            children={this.state.children}
+            infants={this.state.infants}
+            maxGuest={this.state.maxGuest}
+          />
+          {this.state.displayTotal ? (
+            <TotalPrice
+              basePrice={this.state.basePrice}
+              newPrice={this.state.newPrice}
+              nights={this.state.nights}
+              serviceFee={this.state.serviceFee}
+              taxes={this.state.taxes}
+              cleaningFee={this.state.cleaningFee}
+            />
+          ) : null}
+          <ReserveButton
+            onClick={() => {
+              this.handleReserveClick(true);
+            }}
+          >
+            Reserve
+          </ReserveButton>
+          <div className="notice">You won't be charged yet</div>
+        </ReservationWrapper>
+        {this.state.displayConfirmation ? (
+          <Confirmation handleReserveClick={this.handleReserveClick} />
         ) : null}
-        <ReserveButton>Reserve</ReserveButton>
-        <div className="notice">You won't be charged yet</div>
       </Wrapper>
     );
   }

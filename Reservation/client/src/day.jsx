@@ -34,7 +34,7 @@ const Day = props => (
     isSelected={props.isSelected}
     isHover={props.isHover}
     onClick={() => {
-      !props.unavailable && !props.isSelected
+      !props.unavailable && !(props.isCheckIn && props.cal === 'checkOut')
         ? props.handleDateClick(props.cal, props.month, props.day)
         : null;
     }}

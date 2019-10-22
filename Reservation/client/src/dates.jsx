@@ -47,6 +47,7 @@ const Dates = props => (
     <Label>Dates</Label>
     <InputWrapper>
       <Input
+        id="calInput"
         cal={props.cal}
         checkIn={props.checkIn}
         onClick={() => {
@@ -87,6 +88,7 @@ const Dates = props => (
         ></line>
       </svg>
       <Input
+        id="calInput"
         cal={props.cal}
         checkOut={props.checkOut}
         onClick={() => {
@@ -97,7 +99,21 @@ const Dates = props => (
         value={props.checkOut}
       />
     </InputWrapper>
-    {props.cal === 'checkIn' || props.cal === 'checkOut' ? (
+    {props.cal === 'checkIn' ? (
+      <Calendar
+        reservations={props.reservations}
+        checkIn={props.checkIn}
+        checkOut={props.checkOut}
+        selectedDays={props.selectedDays}
+        cal={props.cal}
+        handleDateClick={props.handleDateClick}
+        handleClearClick={props.handleClearClick}
+        displayCal={props.displayCal}
+        minStayWeekday={props.minStayWeekday}
+        minStayWeekend={props.minStayWeekend}
+      />
+    ) : null}
+    {props.cal === 'checkOut' ? (
       <Calendar
         reservations={props.reservations}
         checkIn={props.checkIn}

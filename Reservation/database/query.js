@@ -7,26 +7,14 @@ const { Op } = Sequelize;
 const { Listing } = model;
 const { Reservation } = model;
 
-const getTwoMonth = (listingId, month, callback) => {
-  const start = moment()
-    .date(1)
-    .hour(0);
-  const end = moment()
-    .month(month)
-    .date(31)
-    .hour(0);
+const getRsvps = (listingId, callback) => {
   Listing.findAll({
     where: { id: listingId },
     include: [
       {
-        model: Reservation,
-        where: {
-          checkIn: {
-            [Op.between]: [start, end],
-          },
-        },
-      },
-    ],
+        model: Reservation
+      }
+    ]
   })
     .then(data => {
       const results = [];
@@ -40,4 +28,4 @@ const getTwoMonth = (listingId, month, callback) => {
     });
 };
 
-module.exports = { getTwoMonth };
+module.exports = { getRsvps };

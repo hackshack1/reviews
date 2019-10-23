@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
 import request from '../request';
 import Dates from './dates';
 import Guests from './guests';
 import TotalPrice from './totalPrice';
 import Confirmation from './confirmation';
+const styled = window.styled;
 
 const Wrapper = styled.div`
   font-family: 'Nunito Sans', sans-serif;

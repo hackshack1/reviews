@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import moment from 'moment';
+const styled = window.styled;
 
 const Cell = styled.td`
   :hover {

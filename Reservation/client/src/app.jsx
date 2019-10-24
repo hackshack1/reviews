@@ -18,6 +18,7 @@ const ReservationWrapper = styled.div`
   position: relative;
   z-index: 0;
   display: grid;
+  float: right;
   grid-template-columns: 100%;
   width: 400px;
   float: right;

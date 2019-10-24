@@ -32,4 +32,4 @@ app.get('/reviews',(req, res)=>{
 });
 
 
-app.listen(PORT, ()=> console.log(`Movie list app listening on port ${PORT}`))
+app.listen(PORT, ()=> console.log(`Review app listening on port ${PORT}`))

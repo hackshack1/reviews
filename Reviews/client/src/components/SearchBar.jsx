@@ -1,14 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+const styled = window.styled;
 
 const SearchContainer =styled.div`
 display: flex;
 justify-content: flex-end;
 `;
-
-
-
-
 
 const SearchBar = (props) => {
   return (

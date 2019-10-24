@@ -1,4 +1,4 @@
-npm instal
+npm install
 
 //Start server
 

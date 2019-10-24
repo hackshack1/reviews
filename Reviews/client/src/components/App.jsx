@@ -1,11 +1,13 @@
 import React from 'react';
 import Axios from 'Axios';
 import Reviews from './Reviews.jsx';
-import styled from 'styled-components';
 import Rating from './Rating.jsx'
 import RatingsBars from './RatingsBars.jsx'
 import SearchBar from './SearchBar.jsx'
 import Pagination from './Pagination.jsx'
+const styled = window.styled;
+
+Axios.defaults.baseURL = 'http://localhost:3004'
 
 
 const Wrapper = styled.div`
@@ -35,7 +37,7 @@ const RatingSearchBarContainer = styled.div`
   justify-content: space-between;
 `;
 
-class App extends React.Component {
+class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -162,4 +164,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Review;

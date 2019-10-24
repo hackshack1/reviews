@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
+const styled = window.styled;
 
 const ReviewBox = styled.div`
     padding-bottom: 30px;

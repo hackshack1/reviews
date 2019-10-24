@@ -6,7 +6,7 @@ const db = require('./index.js')
   
 
 const getAllFromHomes = (cb) => {
-  const queryString = `SELECT * FROM cities;`   
+  const queryString = `SELECT * FROM listings where cityName="Boston";`   
   db.query(queryString, (err, dbResObj) => {
     if (err) {
       cb(err);
@@ -16,5 +16,15 @@ const getAllFromHomes = (cb) => {
   })
 }
 
-module.exports={getAllFromHomes: getAllFromHomes}
+const getCurrListing = (cb, listingId) => {
+  const queryString = `select from listings where id="${listingId}";`
+  db.query(queryString, (err, dbResObj)=> {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, dbResObj);
+    }
+  })
+}
+module.exports={getAllFromHomes: getAllFromHomes, getCurrListing: getCurrListing}
 

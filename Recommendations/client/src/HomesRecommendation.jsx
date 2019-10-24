@@ -98,15 +98,14 @@ class HomesRecommendation extends React.Component {
   }
 
   componentDidMount () {
-      let id = window.location.href.split('/')[4];
-      axios.get("/currentListing", {params: {id:id}}).then(result => {
-        let listing = result.data[0];
-        console.log(results.data)
-        // callback(listing)
-      })
-  }
-    // axios.get("/allHomes").then((res) => this.setState({allListings: res.data, pageListings: res.data.slice(0,3)}));
-    // console.log(this.state.allListings)
+    // let id = window.location.href.split('/')[4];
+    // axios.get("/currentListing", {params: {id:id}}).then(result => {
+    //   let listing = result.data[0];
+    //   console.log(results.data)
+    //   // callback(listing)
+    // });
+    axios.get("/allHomes").then((res) => this.setState({allListings: res.data, pageListings: res.data.slice(0,3)}));
+ 
   }
 
   // refreshThreeListings () {

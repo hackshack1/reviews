@@ -6,7 +6,7 @@ const app = express()
 const port = 9000
 
 // app.get('/', (req, res) => res.send('Hello World!'))
-app.use('/recommendations/*/listing', express.static(path.join(__dirname, '../client/dist')))
+app.use('/listing/*', express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json())
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
@@ -27,14 +27,14 @@ app.get("/allHomes", (req,res) => {
 
 
 
-app.get("/currListing", (req,res) => {
-  controller.getCurrListing((err,dbObj)=> {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      console.log('SENT current listing')
-      res.status(200).send(dbObj);
-    }
-  })
-})
+// app.get("/currListing", (req,res) => {
+//   controller.getCurrListing((err,dbObj)=> {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       console.log('SENT current listing')
+//       res.status(200).send(dbObj);
+//     }
+//   })
+// })
 

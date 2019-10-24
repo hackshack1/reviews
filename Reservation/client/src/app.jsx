@@ -21,7 +21,6 @@ const ReservationWrapper = styled.div`
   float: right;
   grid-template-columns: 100%;
   width: 400px;
-  float: right;
   padding: 25px;
   margin: 20px 30px;
   grid-gap: 15px;

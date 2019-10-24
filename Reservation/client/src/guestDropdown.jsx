@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+const styled = window.styled;
 
 const Wrapper = styled.div`
   border: 1px solid #dedede;

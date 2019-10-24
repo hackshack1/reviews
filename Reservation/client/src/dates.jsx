@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from './calendar';
-import styled from 'styled-components';
+const styled = window.styled;
 
 const Wrapper = styled.div`
   padding: 5px 0px;

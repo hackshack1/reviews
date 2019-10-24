@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const config = require('../config.js');
 
-const pw = config.sqlPW || '';
+const pw = config === '' ? null : config.sqlPW;
 
-const db = new Sequelize('air6n6', 'root', pw, {
+const db = new Sequelize('air6n6Rsvp', 'root', pw, {
   dialect: 'mysql'
 });
 
@@ -56,7 +56,7 @@ const Listing = db.define('listing', {
 
 const Reservation = db.define('reservation', {
   id: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
 import Day from './day';
+const styled = window.styled;
 
 const Wrapper = styled.div`
   border: 1px solid #dedede;

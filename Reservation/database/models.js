@@ -4,7 +4,8 @@ const config = require('../config.js');
 const pw = config === '' ? null : config.sqlPW;
 
 const db = new Sequelize('air6n6Rsvp', 'root', pw, {
-  dialect: 'mysql'
+  dialect: 'mysql',
+  host: 'database'
 });
 
 const Listing = db.define('listing', {

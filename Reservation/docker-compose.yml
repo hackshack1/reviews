@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  reservation:
+    build: ./
+    depends_on:
+      - 'database'
+    ports:
+      - '4000:4000'
+
+  database:
+    image: mysql/mysql-server:5.7
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=/run/secrets/mysecret
+    secrets:
+      - mysecret
+    volumes:
+      - db:/var/lib/mysql
+secrets:
+  mysecret:
+    file: ./config.txt
+
+volumes:
+  db:

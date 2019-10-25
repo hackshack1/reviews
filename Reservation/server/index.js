@@ -4,7 +4,7 @@ const path = require('path');
 const query = require('../database/query.js');
 
 const app = express();
-const port = 3015;
+const port = 4000;
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

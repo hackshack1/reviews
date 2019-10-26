@@ -10,6 +10,9 @@ const styled = window.styled;
 const Wrapper = styled.div`
   font-family: 'Nunito Sans', sans-serif;
   color: #454545;
+  button {
+    background: none;
+  }
 `;
 
 const ReservationWrapper = styled.div`

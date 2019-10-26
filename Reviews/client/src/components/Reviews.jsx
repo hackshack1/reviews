@@ -1,6 +1,6 @@
 import React from 'react';
 import ReviewItem from './ReviewItem.jsx';
-import styled from 'styled-components';
+const styled = window.styled;
 
 const ReviewsBox = styled.div`
     max-width: 594px;

@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 const styled = window.styled;
 
 const Wrapper = styled.div`
+  button {
+    background: none;
+  }
+
   .background {
     z-index: 3;
     position: fixed;

@@ -31,5 +31,9 @@ app.get('/reviews',(req, res)=>{
     controller.getAll(req, res);
 });
 
+app.get('*', (req, res) => {
+res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
 
 app.listen(PORT, ()=> console.log(`Review app listening on port ${PORT}`))

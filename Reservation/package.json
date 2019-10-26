@@ -8,7 +8,7 @@
     "coverage": "jest --coverage",
     "makeDB": "mysql -u root -p < ./database/makeDB.sql",
     "seed": "node ./database/seed.js",
-    "build": "webpack -d -w",
+    "build": "webpack",
     "start": "node ./server/index.js",
     "check": "node ./database/mockGenerator.js",
     "lint": "eslint ./",

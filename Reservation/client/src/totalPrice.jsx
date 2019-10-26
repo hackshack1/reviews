@@ -40,12 +40,13 @@ const TotalPrice = props => {
         </section>
       ) : null}
       <section>
-        <span>Occupancy taxes and fees</span> <span>${feesNTaxes}</span>
+        <span>Occupancy taxes and fees</span>{' '}
+        <span>${feesNTaxes.toFixed(2)}</span>
       </section>
       <section className="total">
         <span>Total</span>
         <span className="totalCost">
-          ${props.newPrice + props.serviceFee + feesNTaxes}
+          ${(props.newPrice + props.serviceFee + feesNTaxes).toFixed(2)}
         </span>
       </section>
     </Wrapper>

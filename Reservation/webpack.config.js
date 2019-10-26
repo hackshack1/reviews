@@ -24,5 +24,5 @@ module.exports = {
       }
     ]
   },
-  mode: 'development' //Development: slower but bigger package, when need to deploy, change to production. It will be smaller but faster.
+  mode: 'production' //Development: slower but bigger package, when need to deploy, change to production. It will be smaller but faster.
 };

@@ -7,7 +7,7 @@ import SearchBar from './SearchBar.jsx'
 import Pagination from './Pagination.jsx'
 const styled = window.styled;
 
-Axios.defaults.baseURL = 'http://localhost:3004'
+Axios.defaults.baseURL = 'http://3.133.48.131:80'
 
 
 const Wrapper = styled.div`

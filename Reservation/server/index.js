@@ -23,6 +23,7 @@ app.use(
 );
 
 app.get('/now', (req, res) => {
+  console.log('request get!');
   query.getRsvps(req.query.id, res.send.bind(res));
 });
 

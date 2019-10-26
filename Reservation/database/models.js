@@ -4,9 +4,17 @@ const config = require('../config.js');
 const pw = config === '' ? null : config.sqlPW;
 
 const db = new Sequelize('air6n6Rsvp', 'root', pw, {
-  dialect: 'mysql',
-  host: 'database'
+  host: 'database',
+  dialect: 'mysql'
 });
+
+db.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 const Listing = db.define('listing', {
   id: {

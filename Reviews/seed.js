@@ -2,7 +2,7 @@ const {Reviews} = require('./database/reviewModel.js');
 const dummyData = require('./dummyData.js')
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/reviews',{useNewUrlParser:true});
+mongoose.connect('mongodb://database/reviews',{useNewUrlParser:true});
 
 var generateNewReview = (i) => {
     return new Reviews({

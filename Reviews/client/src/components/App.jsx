@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'Axios';
+import Axios from 'axios';
 import Reviews from './Reviews.jsx';
 import Rating from './Rating.jsx'
 import RatingsBars from './RatingsBars.jsx'
@@ -77,6 +77,7 @@ class Review extends React.Component {
     let id = window.location.href.split('/')[4]
     Axios.get('/reviews',{params:{listingID:id}})
       .then((res)=>{
+        console.log(res)
         var reviews = res.data[0].reviews
         var commsArr = reviews.map((review) => review.ratings.communication);
         var checkArr = reviews.map((review) => review.ratings.checkIn);

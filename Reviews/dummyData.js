@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const dummyReviews = () => {
     var array = []
-    for(var i = 0; i < 14; i++){
+    for(var i = 0; i < 28; i++){
         var obj = {};
         obj.customer = {};
         obj.ratings = {};

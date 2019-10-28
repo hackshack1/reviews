@@ -8,11 +8,13 @@ import Pagination from './Pagination.jsx'
 const styled = window.styled;
 
 Axios.defaults.baseURL = 'http://3.133.48.131:80'
+// Axios.defaults.baseURL = 'http://localhost:80'
 
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 
 `;
 const SpecsContainer = styled.div`

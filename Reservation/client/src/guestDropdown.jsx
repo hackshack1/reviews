@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
+  button {
+    background: none;
+  }
+
   .clear {
     align-self: flex-end;
     font-size: 14px;

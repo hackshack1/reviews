@@ -16,6 +16,10 @@ const Wrapper = styled.div`
   grid-template-rows: 20% 1fr 20%;
   grid-template-columns: 10% 1fr 10%;
 
+  button {
+    background: none;
+  }
+
   :after {
     position: absolute;
     width: 10px;

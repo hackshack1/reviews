@@ -11,6 +11,10 @@ const Wrapper = styled.div`
     font-size: 12px;
     font-weight: 600;
   }
+
+  button {
+    background: none;
+  }
 `;
 
 const Button = styled.button`

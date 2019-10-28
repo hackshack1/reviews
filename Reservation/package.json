@@ -8,10 +8,11 @@
     "coverage": "jest --coverage",
     "makeDB": "mysql -u root -p < ./database/makeDB.sql",
     "seed": "node ./database/seed.js",
-    "build": "webpack -d -w",
-    "start": "nodemon ./server/index.js",
+    "build": "webpack",
+    "start": "node ./server/index.js",
     "check": "node ./database/mockGenerator.js",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "docker": "npm start"
   },
   "author": "",
   "license": "ISC",
@@ -41,6 +42,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "moment": "^2.24.0",

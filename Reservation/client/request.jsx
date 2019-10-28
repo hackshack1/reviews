@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:3015';
+axios.defaults.baseURL = 'http://3.133.48.197:80';
 
 const request = {
   getReservations: callback => {

@@ -10,7 +10,7 @@ npm install
 npm start //to start server
 
 npm makeDB //create database
-npm seed //seed mock data for 
+npm seed //seed mock data
 ```
 Please copy the configEx.js file, and save it as config.js. If your mysql has a password, please enter it in the config.js file.
 

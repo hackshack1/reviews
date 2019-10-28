@@ -15,5 +15,5 @@ npm seed //seed mock data
 Please copy the configEx.js file, and save it as config.js. If your mysql has a password, please enter it in the config.js file.
 
 ## Requirements
--- node v8.15
--- MySQL 5.7
+* node v8.15
+* MySQL 5.7

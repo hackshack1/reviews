@@ -6,14 +6,20 @@ display: flex;
 justify-content: flex-end;
 `;
 
+const SearchInput =styled.input`
+border-radius: 4px;
+border-style: groove;
+padding-right: 30px;
+`;
+
 const SearchBar = (props) => {
   return (
     <SearchContainer>
       <form onSubmit={props.handleSubmit}>
         <label>
-          <input type='text' name='name' placeholder='Search reviews' value={props.value} onChange={props.handleChange}/>
+          <SearchInput autoFocus type='text' name='name' placeholder='Search reviews' value={props.value} onChange={props.handleChange}/>
         </label>
-        <input type='submit' value='Submit'/>
+        {/* <input type='submit' value='Submit'/> */}
     </form>
     </SearchContainer>
   )

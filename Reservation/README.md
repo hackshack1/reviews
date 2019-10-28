@@ -17,3 +17,6 @@ Please copy the configEx.js file, and save it as config.js. If your mysql has a 
 ## Requirements
 * node v8.15
 * MySQL 5.7
+
+## Related Link
+[Proxy Server](https://github.com/Air6n6/ProxyServer-Jessica/tree/master/proxy)
